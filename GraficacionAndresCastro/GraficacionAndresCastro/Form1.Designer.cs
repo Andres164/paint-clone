@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.ptbCanvas = new System.Windows.Forms.PictureBox();
             this.grpBoxTools = new System.Windows.Forms.GroupBox();
             this.grpBoxSize = new System.Windows.Forms.GroupBox();
-            this.btnSize3 = new System.Windows.Forms.Button();
-            this.btnSize2 = new System.Windows.Forms.Button();
-            this.btnSize1 = new System.Windows.Forms.Button();
+            this.btnBrushSize3 = new System.Windows.Forms.Button();
+            this.btnBrushSize2 = new System.Windows.Forms.Button();
+            this.btnBrushSize1 = new System.Windows.Forms.Button();
             this.grpBoxColors = new System.Windows.Forms.GroupBox();
             this.btnWite = new System.Windows.Forms.Button();
             this.btnBlack = new System.Windows.Forms.Button();
@@ -85,39 +86,45 @@
             // 
             this.grpBoxSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.grpBoxSize.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.grpBoxSize.Controls.Add(this.btnSize3);
-            this.grpBoxSize.Controls.Add(this.btnSize2);
-            this.grpBoxSize.Controls.Add(this.btnSize1);
-            this.grpBoxSize.Location = new System.Drawing.Point(474, 12);
+            this.grpBoxSize.Controls.Add(this.btnBrushSize3);
+            this.grpBoxSize.Controls.Add(this.btnBrushSize2);
+            this.grpBoxSize.Controls.Add(this.btnBrushSize1);
+            this.grpBoxSize.Location = new System.Drawing.Point(493, 12);
             this.grpBoxSize.Name = "grpBoxSize";
-            this.grpBoxSize.Size = new System.Drawing.Size(146, 81);
+            this.grpBoxSize.Size = new System.Drawing.Size(127, 81);
             this.grpBoxSize.TabIndex = 3;
             this.grpBoxSize.TabStop = false;
             this.grpBoxSize.Text = "Tamaño";
             // 
-            // btnSize3
+            // btnBrushSize3
             // 
-            this.btnSize3.Location = new System.Drawing.Point(99, 29);
-            this.btnSize3.Name = "btnSize3";
-            this.btnSize3.Size = new System.Drawing.Size(36, 36);
-            this.btnSize3.TabIndex = 10;
-            this.btnSize3.UseVisualStyleBackColor = true;
+            this.btnBrushSize3.BackColor = System.Drawing.Color.Black;
+            this.btnBrushSize3.Location = new System.Drawing.Point(78, 26);
+            this.btnBrushSize3.Name = "btnBrushSize3";
+            this.btnBrushSize3.Size = new System.Drawing.Size(36, 36);
+            this.btnBrushSize3.TabIndex = 10;
+            this.btnBrushSize3.UseVisualStyleBackColor = false;
+            this.btnBrushSize3.Click += new System.EventHandler(this.btnBrushSize3_Click);
             // 
-            // btnSize2
+            // btnBrushSize2
             // 
-            this.btnSize2.Location = new System.Drawing.Point(57, 29);
-            this.btnSize2.Name = "btnSize2";
-            this.btnSize2.Size = new System.Drawing.Size(36, 36);
-            this.btnSize2.TabIndex = 9;
-            this.btnSize2.UseVisualStyleBackColor = true;
+            this.btnBrushSize2.BackColor = System.Drawing.Color.Black;
+            this.btnBrushSize2.Location = new System.Drawing.Point(42, 30);
+            this.btnBrushSize2.Name = "btnBrushSize2";
+            this.btnBrushSize2.Size = new System.Drawing.Size(30, 30);
+            this.btnBrushSize2.TabIndex = 9;
+            this.btnBrushSize2.UseVisualStyleBackColor = false;
+            this.btnBrushSize2.Click += new System.EventHandler(this.btnBrushSize2_Click);
             // 
-            // btnSize1
+            // btnBrushSize1
             // 
-            this.btnSize1.Location = new System.Drawing.Point(15, 29);
-            this.btnSize1.Name = "btnSize1";
-            this.btnSize1.Size = new System.Drawing.Size(36, 36);
-            this.btnSize1.TabIndex = 8;
-            this.btnSize1.UseVisualStyleBackColor = true;
+            this.btnBrushSize1.BackColor = System.Drawing.Color.Black;
+            this.btnBrushSize1.Location = new System.Drawing.Point(11, 33);
+            this.btnBrushSize1.Name = "btnBrushSize1";
+            this.btnBrushSize1.Size = new System.Drawing.Size(25, 25);
+            this.btnBrushSize1.TabIndex = 8;
+            this.btnBrushSize1.UseVisualStyleBackColor = false;
+            this.btnBrushSize1.Click += new System.EventHandler(this.btnBrushSize1_Click);
             // 
             // grpBoxColors
             // 
@@ -200,6 +207,8 @@
             // 
             // btnColorPalette
             // 
+            this.btnColorPalette.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnColorPalette.BackgroundImage")));
+            this.btnColorPalette.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnColorPalette.Location = new System.Drawing.Point(149, 22);
             this.btnColorPalette.Name = "btnColorPalette";
             this.btnColorPalette.Size = new System.Drawing.Size(50, 50);
@@ -273,9 +282,9 @@
         private PictureBox ptbCanvas;
         private GroupBox grpBoxTools;
         private GroupBox grpBoxSize;
-        private Button btnSize3;
-        private Button btnSize2;
-        private Button btnSize1;
+        private Button btnBrushSize3;
+        private Button btnBrushSize2;
+        private Button btnBrushSize1;
         private GroupBox grpBoxColors;
         private Button btnWite;
         private Button btnBlack;

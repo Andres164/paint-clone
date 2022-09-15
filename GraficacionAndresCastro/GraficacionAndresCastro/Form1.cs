@@ -3,11 +3,13 @@ namespace GraficacionAndresCastro
     public partial class MainForm : Form
     {
         Color selectedColor;
+        Int16 selectedBrushSize;
         Bitmap canvas;
         public MainForm()
         {
             InitializeComponent();
             selectedColor = Color.Black;
+            selectedBrushSize = 1;
             canvas = new Bitmap(ptbCanvas.Width, ptbCanvas.Height);
             this.btnSelectedColor.BackColor = selectedColor;
         }
@@ -20,7 +22,10 @@ namespace GraficacionAndresCastro
 
         private void ptbCanvas_MouseClick(object sender, MouseEventArgs e)
         {
-            canvas.SetPixel(e.X, e.Y, selectedColor);
+            for (int i = 0; i <= selectedBrushSize; i++)
+                for(int j = 0; j <= selectedBrushSize; j++)
+                    canvas.SetPixel(e.X + i, e.Y + j, selectedColor);
+
             this.ptbCanvas.Image = canvas;
         }
 
@@ -45,6 +50,12 @@ namespace GraficacionAndresCastro
             }
         }
 
+
+        private void btnBrushSize1_Click(object sender, EventArgs e) { selectedBrushSize = 1; }
+
+        private void btnBrushSize2_Click(object sender, EventArgs e) { selectedBrushSize = 2; }
+
+        private void btnBrushSize3_Click(object sender, EventArgs e) { selectedBrushSize = 3; }
         private void ptbCanvas_Resize(object sender, EventArgs e)
         {
             Bitmap resizedCanvas = new Bitmap(this.canvas, this.ptbCanvas.Width, this.ptbCanvas.Height);

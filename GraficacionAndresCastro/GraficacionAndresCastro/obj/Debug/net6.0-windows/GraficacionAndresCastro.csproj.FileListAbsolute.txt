@@ -15,3 +15,4 @@ D:\Escuela\5to semestre\Graficacion\GraficacionAndresCastro\GraficacionAndresCas
 D:\Escuela\5to semestre\Graficacion\GraficacionAndresCastro\GraficacionAndresCastro\obj\Debug\net6.0-windows\GraficacionAndresCastro.pdb
 D:\Escuela\5to semestre\Graficacion\GraficacionAndresCastro\GraficacionAndresCastro\obj\Debug\net6.0-windows\GraficacionAndresCastro.genruntimeconfig.cache
 D:\Escuela\5to semestre\Graficacion\GraficacionAndresCastro\GraficacionAndresCastro\obj\Debug\net6.0-windows\ref\GraficacionAndresCastro.dll
+D:\Escuela\5to semestre\Graficacion\graficacionAndresCastro\GraficacionAndresCastro\obj\Debug\net6.0-windows\GraficacionAndresCastro.Properties.Resources.resources
