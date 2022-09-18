@@ -44,23 +44,25 @@
             this.btnBlue = new System.Windows.Forms.Button();
             this.btnColorPalette = new System.Windows.Forms.Button();
             this.btnSelectedColor = new System.Windows.Forms.Button();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stripMenuItemNew = new System.Windows.Forms.ToolStripMenuItem();
+            this.stripMenuItemSaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.pixelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rectaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.circuloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.ptbCanvas)).BeginInit();
             this.grpBoxTools.SuspendLayout();
             this.grpBoxSize.SuspendLayout();
             this.grpBoxColors.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
+            this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // ptbCanvas
             // 
-            this.ptbCanvas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ptbCanvas.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.ptbCanvas.BackColor = System.Drawing.Color.White;
             this.ptbCanvas.Location = new System.Drawing.Point(41, 163);
             this.ptbCanvas.Name = "ptbCanvas";
@@ -224,17 +226,43 @@
             this.btnSelectedColor.TabIndex = 0;
             this.btnSelectedColor.UseVisualStyleBackColor = true;
             // 
-            // menuStrip1
+            // menuStrip
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.archivoToolStripMenuItem,
             this.pixelToolStripMenuItem,
             this.rectaToolStripMenuItem,
             this.circuloToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(871, 24);
-            this.menuStrip1.TabIndex = 2;
-            this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(871, 24);
+            this.menuStrip.TabIndex = 2;
+            this.menuStrip.Text = "menuStrip1";
+            // 
+            // archivoToolStripMenuItem
+            // 
+            this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.stripMenuItemNew,
+            this.stripMenuItemSaveAs});
+            this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
+            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.archivoToolStripMenuItem.Text = "Archivo";
+            // 
+            // stripMenuItemNew
+            // 
+            this.stripMenuItemNew.Name = "stripMenuItemNew";
+            this.stripMenuItemNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.stripMenuItemNew.Size = new System.Drawing.Size(192, 22);
+            this.stripMenuItemNew.Text = "Nuevo";
+            this.stripMenuItemNew.Click += new System.EventHandler(this.stripMenuItemNew_Click);
+            // 
+            // stripMenuItemSaveAs
+            // 
+            this.stripMenuItemSaveAs.Name = "stripMenuItemSaveAs";
+            this.stripMenuItemSaveAs.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
+            this.stripMenuItemSaveAs.Size = new System.Drawing.Size(192, 22);
+            this.stripMenuItemSaveAs.Text = "Guardar como";
+            this.stripMenuItemSaveAs.Click += new System.EventHandler(this.stripMenuItemSaveAs_Click);
             // 
             // pixelToolStripMenuItem
             // 
@@ -254,6 +282,12 @@
             this.circuloToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.circuloToolStripMenuItem.Text = "Circulo";
             // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.DefaultExt = "PNG|*.png";
+            this.saveFileDialog.Filter = "BMP|*.bmp|GIF|*.gif|JPG|*.jpg;*.jpeg|PNG|*.png|TIFF|*.tif;*.tiff";
+            this.saveFileDialog.FilterIndex = 4;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -262,16 +296,16 @@
             this.ClientSize = new System.Drawing.Size(871, 595);
             this.Controls.Add(this.grpBoxTools);
             this.Controls.Add(this.ptbCanvas);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.menuStrip);
+            this.MainMenuStrip = this.menuStrip;
             this.Name = "MainForm";
             this.Text = "Elaborado por Andres Castro";
             ((System.ComponentModel.ISupportInitialize)(this.ptbCanvas)).EndInit();
             this.grpBoxTools.ResumeLayout(false);
             this.grpBoxSize.ResumeLayout(false);
             this.grpBoxColors.ResumeLayout(false);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -294,10 +328,14 @@
         private Button btnBlue;
         private Button btnColorPalette;
         private Button btnSelectedColor;
-        private MenuStrip menuStrip1;
+        private MenuStrip menuStrip;
         private ToolStripMenuItem pixelToolStripMenuItem;
         private ToolStripMenuItem rectaToolStripMenuItem;
         private ToolStripMenuItem circuloToolStripMenuItem;
         private ColorDialog colorDialog;
+        private ToolStripMenuItem archivoToolStripMenuItem;
+        private ToolStripMenuItem stripMenuItemNew;
+        private ToolStripMenuItem stripMenuItemSaveAs;
+        private SaveFileDialog saveFileDialog;
     }
 }

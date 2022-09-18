@@ -5,6 +5,7 @@ namespace GraficacionAndresCastro
         Color selectedColor;
         Int16 selectedBrushSize;
         Bitmap canvas;
+        bool isWorkSaved;
         public MainForm()
         {
             InitializeComponent();
@@ -12,6 +13,7 @@ namespace GraficacionAndresCastro
             selectedBrushSize = 1;
             canvas = new Bitmap(ptbCanvas.Width, ptbCanvas.Height);
             this.btnSelectedColor.BackColor = selectedColor;
+            isWorkSaved = true;
         }
         private void changeSelectedColor(object sender)
         {
@@ -27,6 +29,7 @@ namespace GraficacionAndresCastro
                     canvas.SetPixel(e.X + i, e.Y + j, selectedColor);
 
             this.ptbCanvas.Image = canvas;
+            this.isWorkSaved = false;
         }
 
         private void btnBlue_Click(object sender, EventArgs e) { changeSelectedColor(sender); }
@@ -48,6 +51,7 @@ namespace GraficacionAndresCastro
                 this.selectedColor = colorDialog.Color;
                 this.btnSelectedColor.BackColor = this.selectedColor;
             }
+            colorDialog.Dispose();
         }
 
 
@@ -58,9 +62,41 @@ namespace GraficacionAndresCastro
         private void btnBrushSize3_Click(object sender, EventArgs e) { selectedBrushSize = 3; }
         private void ptbCanvas_Resize(object sender, EventArgs e)
         {
-            Bitmap resizedCanvas = new Bitmap(this.canvas, this.ptbCanvas.Width, this.ptbCanvas.Height);
-            this.canvas.Dispose();
-            this.canvas = resizedCanvas;
+            //Bitmap temp = this.canvas;
+            //this.canvas.Dispose();
+            //this.canvas = new Bitmap(this.ptbCanvas.Width, this.ptbCanvas.Height);
+            //this.ptbCanvas.Image = this.canvas;
+            /*this.canvas = new Bitmap(temp, this.ptbCanvas.Size);
+            temp.Dispose();*/
         }
-    }
+        private void stripMenuItemNew_Click(object sender, EventArgs e)
+        {
+            if(isWorkSaved)
+                resetCanvas();
+            else
+            {
+                if (MessageBox.Show("Los cambios realizados no seran guardados, desea continuar?", "No se guardaran los cambios", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.OK) 
+                    resetCanvas();
+            }
+        }
+        private void resetCanvas()
+        {
+            this.ptbCanvas.Image = null;
+            this.canvas.Dispose();
+            this.canvas = new Bitmap(this.ptbCanvas.Width, this.ptbCanvas.Height);
+        }
+
+        private void stripMenuItemSaveAs_Click(object sender, EventArgs e)
+        {
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                canvas.Save(saveFileDialog.FileName);
+                isWorkSaved = true;
+            }
+            saveFileDialog.Dispose();
+        }
+
+
+}
 }

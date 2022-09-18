@@ -16,3 +16,21 @@ D:\Escuela\5to semestre\Graficacion\GraficacionAndresCastro\GraficacionAndresCas
 D:\Escuela\5to semestre\Graficacion\GraficacionAndresCastro\GraficacionAndresCastro\obj\Debug\net6.0-windows\GraficacionAndresCastro.genruntimeconfig.cache
 D:\Escuela\5to semestre\Graficacion\GraficacionAndresCastro\GraficacionAndresCastro\obj\Debug\net6.0-windows\ref\GraficacionAndresCastro.dll
 D:\Escuela\5to semestre\Graficacion\graficacionAndresCastro\GraficacionAndresCastro\obj\Debug\net6.0-windows\GraficacionAndresCastro.Properties.Resources.resources
+D:\Repositorios\paint-clone\GraficacionAndresCastro\GraficacionAndresCastro\bin\Debug\net6.0-windows\GraficacionAndresCastro.exe
+D:\Repositorios\paint-clone\GraficacionAndresCastro\GraficacionAndresCastro\bin\Debug\net6.0-windows\GraficacionAndresCastro.deps.json
+D:\Repositorios\paint-clone\GraficacionAndresCastro\GraficacionAndresCastro\bin\Debug\net6.0-windows\GraficacionAndresCastro.runtimeconfig.json
+D:\Repositorios\paint-clone\GraficacionAndresCastro\GraficacionAndresCastro\bin\Debug\net6.0-windows\GraficacionAndresCastro.dll
+D:\Repositorios\paint-clone\GraficacionAndresCastro\GraficacionAndresCastro\bin\Debug\net6.0-windows\ref\GraficacionAndresCastro.dll
+D:\Repositorios\paint-clone\GraficacionAndresCastro\GraficacionAndresCastro\bin\Debug\net6.0-windows\GraficacionAndresCastro.pdb
+D:\Repositorios\paint-clone\GraficacionAndresCastro\GraficacionAndresCastro\obj\Debug\net6.0-windows\GraficacionAndresCastro.csproj.AssemblyReference.cache
+D:\Repositorios\paint-clone\GraficacionAndresCastro\GraficacionAndresCastro\obj\Debug\net6.0-windows\GraficacionAndresCastro.MainForm.resources
+D:\Repositorios\paint-clone\GraficacionAndresCastro\GraficacionAndresCastro\obj\Debug\net6.0-windows\GraficacionAndresCastro.Properties.Resources.resources
+D:\Repositorios\paint-clone\GraficacionAndresCastro\GraficacionAndresCastro\obj\Debug\net6.0-windows\GraficacionAndresCastro.csproj.GenerateResource.cache
+D:\Repositorios\paint-clone\GraficacionAndresCastro\GraficacionAndresCastro\obj\Debug\net6.0-windows\GraficacionAndresCastro.GeneratedMSBuildEditorConfig.editorconfig
+D:\Repositorios\paint-clone\GraficacionAndresCastro\GraficacionAndresCastro\obj\Debug\net6.0-windows\GraficacionAndresCastro.AssemblyInfoInputs.cache
+D:\Repositorios\paint-clone\GraficacionAndresCastro\GraficacionAndresCastro\obj\Debug\net6.0-windows\GraficacionAndresCastro.AssemblyInfo.cs
+D:\Repositorios\paint-clone\GraficacionAndresCastro\GraficacionAndresCastro\obj\Debug\net6.0-windows\GraficacionAndresCastro.csproj.CoreCompileInputs.cache
+D:\Repositorios\paint-clone\GraficacionAndresCastro\GraficacionAndresCastro\obj\Debug\net6.0-windows\GraficacionAndresCastro.dll
+D:\Repositorios\paint-clone\GraficacionAndresCastro\GraficacionAndresCastro\obj\Debug\net6.0-windows\ref\GraficacionAndresCastro.dll
+D:\Repositorios\paint-clone\GraficacionAndresCastro\GraficacionAndresCastro\obj\Debug\net6.0-windows\GraficacionAndresCastro.pdb
+D:\Repositorios\paint-clone\GraficacionAndresCastro\GraficacionAndresCastro\obj\Debug\net6.0-windows\GraficacionAndresCastro.genruntimeconfig.cache
