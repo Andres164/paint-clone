@@ -71,19 +71,29 @@ namespace GraficacionAndresCastro
         }
         private void stripMenuItemNew_Click(object sender, EventArgs e)
         {
+            NewFileDialog newFileDialog = new NewFileDialog();
             if(isWorkSaved)
-                resetCanvas();
+            {
+                if (newFileDialog.ShowDialog(this) == DialogResult.OK)
+                    resetCanvas(newFileDialog.canvasHeight, newFileDialog.canvasWidth);
+            }
             else
             {
-                if (MessageBox.Show("Los cambios realizados no seran guardados, desea continuar?", "No se guardaran los cambios", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.OK) 
-                    resetCanvas();
+                if (MessageBox.Show("Los cambios realizados no seran guardados, desea continuar?", "No se guardaran los cambios", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation) == DialogResult.OK)
+                    if (newFileDialog.ShowDialog() == DialogResult.OK)
+                        resetCanvas(newFileDialog.canvasHeight, newFileDialog.canvasWidth);
             }
+            newFileDialog.Dispose();
         }
-        private void resetCanvas()
+        private void resetCanvas(Int16 height, Int16 width)
         {
             this.ptbCanvas.Image = null;
             this.canvas.Dispose();
+            this.ptbCanvas.Height = height;
+            this.ptbCanvas.Width = width;
             this.canvas = new Bitmap(this.ptbCanvas.Width, this.ptbCanvas.Height);
+            this.ptbCanvas.Left = (this.Width - this.ptbCanvas.Width) / 2;
+            this.ptbCanvas.Top = (this.Height - this.ptbCanvas.Height) / 2;
         }
 
         private void stripMenuItemSaveAs_Click(object sender, EventArgs e)

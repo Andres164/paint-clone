@@ -64,9 +64,9 @@
             // 
             this.ptbCanvas.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.ptbCanvas.BackColor = System.Drawing.Color.White;
-            this.ptbCanvas.Location = new System.Drawing.Point(41, 163);
+            this.ptbCanvas.Location = new System.Drawing.Point(32, 165);
             this.ptbCanvas.Name = "ptbCanvas";
-            this.ptbCanvas.Size = new System.Drawing.Size(781, 394);
+            this.ptbCanvas.Size = new System.Drawing.Size(800, 600);
             this.ptbCanvas.TabIndex = 0;
             this.ptbCanvas.TabStop = false;
             this.ptbCanvas.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ptbCanvas_MouseClick);
@@ -74,26 +74,27 @@
             // 
             // grpBoxTools
             // 
-            this.grpBoxTools.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.grpBoxTools.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.grpBoxTools.Controls.Add(this.grpBoxSize);
             this.grpBoxTools.Controls.Add(this.grpBoxColors);
             this.grpBoxTools.Dock = System.Windows.Forms.DockStyle.Top;
             this.grpBoxTools.Location = new System.Drawing.Point(0, 24);
             this.grpBoxTools.Name = "grpBoxTools";
-            this.grpBoxTools.Size = new System.Drawing.Size(871, 100);
+            this.grpBoxTools.Size = new System.Drawing.Size(870, 94);
             this.grpBoxTools.TabIndex = 1;
             this.grpBoxTools.TabStop = false;
             // 
             // grpBoxSize
             // 
             this.grpBoxSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.grpBoxSize.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.grpBoxSize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.grpBoxSize.Controls.Add(this.btnBrushSize3);
             this.grpBoxSize.Controls.Add(this.btnBrushSize2);
             this.grpBoxSize.Controls.Add(this.btnBrushSize1);
-            this.grpBoxSize.Location = new System.Drawing.Point(493, 12);
+            this.grpBoxSize.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.grpBoxSize.Location = new System.Drawing.Point(512, 11);
             this.grpBoxSize.Name = "grpBoxSize";
-            this.grpBoxSize.Size = new System.Drawing.Size(127, 81);
+            this.grpBoxSize.Size = new System.Drawing.Size(127, 77);
             this.grpBoxSize.TabIndex = 3;
             this.grpBoxSize.TabStop = false;
             this.grpBoxSize.Text = "Tamaño";
@@ -101,7 +102,7 @@
             // btnBrushSize3
             // 
             this.btnBrushSize3.BackColor = System.Drawing.Color.Black;
-            this.btnBrushSize3.Location = new System.Drawing.Point(78, 26);
+            this.btnBrushSize3.Location = new System.Drawing.Point(78, 24);
             this.btnBrushSize3.Name = "btnBrushSize3";
             this.btnBrushSize3.Size = new System.Drawing.Size(36, 36);
             this.btnBrushSize3.TabIndex = 10;
@@ -111,7 +112,7 @@
             // btnBrushSize2
             // 
             this.btnBrushSize2.BackColor = System.Drawing.Color.Black;
-            this.btnBrushSize2.Location = new System.Drawing.Point(42, 30);
+            this.btnBrushSize2.Location = new System.Drawing.Point(42, 28);
             this.btnBrushSize2.Name = "btnBrushSize2";
             this.btnBrushSize2.Size = new System.Drawing.Size(30, 30);
             this.btnBrushSize2.TabIndex = 9;
@@ -121,7 +122,7 @@
             // btnBrushSize1
             // 
             this.btnBrushSize1.BackColor = System.Drawing.Color.Black;
-            this.btnBrushSize1.Location = new System.Drawing.Point(11, 33);
+            this.btnBrushSize1.Location = new System.Drawing.Point(11, 31);
             this.btnBrushSize1.Name = "btnBrushSize1";
             this.btnBrushSize1.Size = new System.Drawing.Size(25, 25);
             this.btnBrushSize1.TabIndex = 8;
@@ -131,7 +132,7 @@
             // grpBoxColors
             // 
             this.grpBoxColors.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.grpBoxColors.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.grpBoxColors.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.grpBoxColors.Controls.Add(this.btnWite);
             this.grpBoxColors.Controls.Add(this.btnBlack);
             this.grpBoxColors.Controls.Add(this.btnLigthGreen);
@@ -140,9 +141,10 @@
             this.grpBoxColors.Controls.Add(this.btnBlue);
             this.grpBoxColors.Controls.Add(this.btnColorPalette);
             this.grpBoxColors.Controls.Add(this.btnSelectedColor);
-            this.grpBoxColors.Location = new System.Drawing.Point(633, 12);
+            this.grpBoxColors.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.grpBoxColors.Location = new System.Drawing.Point(652, 11);
             this.grpBoxColors.Name = "grpBoxColors";
-            this.grpBoxColors.Size = new System.Drawing.Size(207, 81);
+            this.grpBoxColors.Size = new System.Drawing.Size(207, 77);
             this.grpBoxColors.TabIndex = 2;
             this.grpBoxColors.TabStop = false;
             this.grpBoxColors.Text = "Colores";
@@ -150,7 +152,7 @@
             // btnWite
             // 
             this.btnWite.BackColor = System.Drawing.Color.White;
-            this.btnWite.Location = new System.Drawing.Point(120, 49);
+            this.btnWite.Location = new System.Drawing.Point(120, 45);
             this.btnWite.Name = "btnWite";
             this.btnWite.Size = new System.Drawing.Size(23, 23);
             this.btnWite.TabIndex = 7;
@@ -160,7 +162,7 @@
             // btnBlack
             // 
             this.btnBlack.BackColor = System.Drawing.Color.Black;
-            this.btnBlack.Location = new System.Drawing.Point(120, 22);
+            this.btnBlack.Location = new System.Drawing.Point(120, 18);
             this.btnBlack.Name = "btnBlack";
             this.btnBlack.Size = new System.Drawing.Size(23, 23);
             this.btnBlack.TabIndex = 6;
@@ -170,7 +172,7 @@
             // btnLigthGreen
             // 
             this.btnLigthGreen.BackColor = System.Drawing.Color.LightGreen;
-            this.btnLigthGreen.Location = new System.Drawing.Point(91, 49);
+            this.btnLigthGreen.Location = new System.Drawing.Point(91, 45);
             this.btnLigthGreen.Name = "btnLigthGreen";
             this.btnLigthGreen.Size = new System.Drawing.Size(23, 23);
             this.btnLigthGreen.TabIndex = 5;
@@ -180,7 +182,7 @@
             // btnGreen
             // 
             this.btnGreen.BackColor = System.Drawing.Color.Green;
-            this.btnGreen.Location = new System.Drawing.Point(91, 22);
+            this.btnGreen.Location = new System.Drawing.Point(91, 18);
             this.btnGreen.Name = "btnGreen";
             this.btnGreen.Size = new System.Drawing.Size(23, 23);
             this.btnGreen.TabIndex = 4;
@@ -190,7 +192,7 @@
             // btnLigthBlue
             // 
             this.btnLigthBlue.BackColor = System.Drawing.Color.LightBlue;
-            this.btnLigthBlue.Location = new System.Drawing.Point(62, 49);
+            this.btnLigthBlue.Location = new System.Drawing.Point(62, 45);
             this.btnLigthBlue.Name = "btnLigthBlue";
             this.btnLigthBlue.Size = new System.Drawing.Size(23, 23);
             this.btnLigthBlue.TabIndex = 3;
@@ -200,7 +202,7 @@
             // btnBlue
             // 
             this.btnBlue.BackColor = System.Drawing.Color.Blue;
-            this.btnBlue.Location = new System.Drawing.Point(62, 22);
+            this.btnBlue.Location = new System.Drawing.Point(62, 18);
             this.btnBlue.Name = "btnBlue";
             this.btnBlue.Size = new System.Drawing.Size(23, 23);
             this.btnBlue.TabIndex = 2;
@@ -211,7 +213,7 @@
             // 
             this.btnColorPalette.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnColorPalette.BackgroundImage")));
             this.btnColorPalette.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnColorPalette.Location = new System.Drawing.Point(149, 22);
+            this.btnColorPalette.Location = new System.Drawing.Point(149, 18);
             this.btnColorPalette.Name = "btnColorPalette";
             this.btnColorPalette.Size = new System.Drawing.Size(50, 50);
             this.btnColorPalette.TabIndex = 1;
@@ -220,7 +222,7 @@
             // 
             // btnSelectedColor
             // 
-            this.btnSelectedColor.Location = new System.Drawing.Point(6, 22);
+            this.btnSelectedColor.Location = new System.Drawing.Point(6, 18);
             this.btnSelectedColor.Name = "btnSelectedColor";
             this.btnSelectedColor.Size = new System.Drawing.Size(50, 50);
             this.btnSelectedColor.TabIndex = 0;
@@ -228,6 +230,7 @@
             // 
             // menuStrip
             // 
+            this.menuStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivoToolStripMenuItem,
             this.pixelToolStripMenuItem,
@@ -235,21 +238,25 @@
             this.circuloToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(871, 24);
+            this.menuStrip.Size = new System.Drawing.Size(870, 24);
             this.menuStrip.TabIndex = 2;
             this.menuStrip.Text = "menuStrip1";
             // 
             // archivoToolStripMenuItem
             // 
+            this.archivoToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.stripMenuItemNew,
             this.stripMenuItemSaveAs});
+            this.archivoToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
             this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.archivoToolStripMenuItem.Text = "Archivo";
             // 
             // stripMenuItemNew
             // 
+            this.stripMenuItemNew.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.stripMenuItemNew.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.stripMenuItemNew.Name = "stripMenuItemNew";
             this.stripMenuItemNew.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.stripMenuItemNew.Size = new System.Drawing.Size(192, 22);
@@ -258,6 +265,8 @@
             // 
             // stripMenuItemSaveAs
             // 
+            this.stripMenuItemSaveAs.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.stripMenuItemSaveAs.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.stripMenuItemSaveAs.Name = "stripMenuItemSaveAs";
             this.stripMenuItemSaveAs.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
             this.stripMenuItemSaveAs.Size = new System.Drawing.Size(192, 22);
@@ -266,18 +275,24 @@
             // 
             // pixelToolStripMenuItem
             // 
+            this.pixelToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.pixelToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.pixelToolStripMenuItem.Name = "pixelToolStripMenuItem";
             this.pixelToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.pixelToolStripMenuItem.Text = "Pixel";
             // 
             // rectaToolStripMenuItem
             // 
+            this.rectaToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.rectaToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.rectaToolStripMenuItem.Name = "rectaToolStripMenuItem";
             this.rectaToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.rectaToolStripMenuItem.Text = "Recta";
             // 
             // circuloToolStripMenuItem
             // 
+            this.circuloToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.circuloToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.circuloToolStripMenuItem.Name = "circuloToolStripMenuItem";
             this.circuloToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.circuloToolStripMenuItem.Text = "Circulo";
@@ -292,8 +307,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(871, 595);
+            this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.ClientSize = new System.Drawing.Size(870, 818);
             this.Controls.Add(this.grpBoxTools);
             this.Controls.Add(this.ptbCanvas);
             this.Controls.Add(this.menuStrip);
