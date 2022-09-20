@@ -53,24 +53,24 @@
             this.circuloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.panelViewPort = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.ptbCanvas)).BeginInit();
             this.grpBoxTools.SuspendLayout();
             this.grpBoxSize.SuspendLayout();
             this.grpBoxColors.SuspendLayout();
             this.menuStrip.SuspendLayout();
+            this.panelViewPort.SuspendLayout();
             this.SuspendLayout();
             // 
             // ptbCanvas
             // 
-            this.ptbCanvas.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.ptbCanvas.BackColor = System.Drawing.Color.White;
-            this.ptbCanvas.Location = new System.Drawing.Point(32, 165);
+            this.ptbCanvas.Location = new System.Drawing.Point(118, 45);
             this.ptbCanvas.Name = "ptbCanvas";
             this.ptbCanvas.Size = new System.Drawing.Size(800, 600);
             this.ptbCanvas.TabIndex = 0;
             this.ptbCanvas.TabStop = false;
             this.ptbCanvas.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ptbCanvas_MouseClick);
-            this.ptbCanvas.Resize += new System.EventHandler(this.ptbCanvas_Resize);
             // 
             // grpBoxTools
             // 
@@ -80,7 +80,7 @@
             this.grpBoxTools.Dock = System.Windows.Forms.DockStyle.Top;
             this.grpBoxTools.Location = new System.Drawing.Point(0, 24);
             this.grpBoxTools.Name = "grpBoxTools";
-            this.grpBoxTools.Size = new System.Drawing.Size(870, 94);
+            this.grpBoxTools.Size = new System.Drawing.Size(1009, 94);
             this.grpBoxTools.TabIndex = 1;
             this.grpBoxTools.TabStop = false;
             // 
@@ -92,7 +92,7 @@
             this.grpBoxSize.Controls.Add(this.btnBrushSize2);
             this.grpBoxSize.Controls.Add(this.btnBrushSize1);
             this.grpBoxSize.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.grpBoxSize.Location = new System.Drawing.Point(512, 11);
+            this.grpBoxSize.Location = new System.Drawing.Point(651, 11);
             this.grpBoxSize.Name = "grpBoxSize";
             this.grpBoxSize.Size = new System.Drawing.Size(127, 77);
             this.grpBoxSize.TabIndex = 3;
@@ -142,7 +142,7 @@
             this.grpBoxColors.Controls.Add(this.btnColorPalette);
             this.grpBoxColors.Controls.Add(this.btnSelectedColor);
             this.grpBoxColors.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.grpBoxColors.Location = new System.Drawing.Point(652, 11);
+            this.grpBoxColors.Location = new System.Drawing.Point(791, 11);
             this.grpBoxColors.Name = "grpBoxColors";
             this.grpBoxColors.Size = new System.Drawing.Size(207, 77);
             this.grpBoxColors.TabIndex = 2;
@@ -238,7 +238,7 @@
             this.circuloToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(870, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1009, 24);
             this.menuStrip.TabIndex = 2;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -303,14 +303,26 @@
             this.saveFileDialog.Filter = "BMP|*.bmp|GIF|*.gif|JPG|*.jpg;*.jpeg|PNG|*.png|TIFF|*.tif;*.tiff";
             this.saveFileDialog.FilterIndex = 4;
             // 
+            // panelViewPort
+            // 
+            this.panelViewPort.AutoScroll = true;
+            this.panelViewPort.AutoScrollMargin = new System.Drawing.Size(5, 5);
+            this.panelViewPort.Controls.Add(this.ptbCanvas);
+            this.panelViewPort.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelViewPort.Location = new System.Drawing.Point(0, 118);
+            this.panelViewPort.Name = "panelViewPort";
+            this.panelViewPort.Size = new System.Drawing.Size(1009, 700);
+            this.panelViewPort.TabIndex = 3;
+            this.panelViewPort.Resize += new System.EventHandler(this.panelViewPort_Resize);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(870, 818);
+            this.ClientSize = new System.Drawing.Size(1009, 818);
+            this.Controls.Add(this.panelViewPort);
             this.Controls.Add(this.grpBoxTools);
-            this.Controls.Add(this.ptbCanvas);
             this.Controls.Add(this.menuStrip);
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainForm";
@@ -321,6 +333,7 @@
             this.grpBoxColors.ResumeLayout(false);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
+            this.panelViewPort.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -352,5 +365,6 @@
         private ToolStripMenuItem stripMenuItemNew;
         private ToolStripMenuItem stripMenuItemSaveAs;
         private SaveFileDialog saveFileDialog;
+        private Panel panelViewPort;
     }
 }

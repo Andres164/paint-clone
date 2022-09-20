@@ -14,6 +14,7 @@ namespace GraficacionAndresCastro
             canvas = new Bitmap(ptbCanvas.Width, ptbCanvas.Height);
             this.btnSelectedColor.BackColor = selectedColor;
             isWorkSaved = true;
+            recenterPtbCanvas();
         }
         private void changeSelectedColor(object sender)
         {
@@ -60,15 +61,7 @@ namespace GraficacionAndresCastro
         private void btnBrushSize2_Click(object sender, EventArgs e) { selectedBrushSize = 2; }
 
         private void btnBrushSize3_Click(object sender, EventArgs e) { selectedBrushSize = 3; }
-        private void ptbCanvas_Resize(object sender, EventArgs e)
-        {
-            //Bitmap temp = this.canvas;
-            //this.canvas.Dispose();
-            //this.canvas = new Bitmap(this.ptbCanvas.Width, this.ptbCanvas.Height);
-            //this.ptbCanvas.Image = this.canvas;
-            /*this.canvas = new Bitmap(temp, this.ptbCanvas.Size);
-            temp.Dispose();*/
-        }
+        
         private void stripMenuItemNew_Click(object sender, EventArgs e)
         {
             NewFileDialog newFileDialog = new NewFileDialog();
@@ -92,8 +85,7 @@ namespace GraficacionAndresCastro
             this.ptbCanvas.Height = height;
             this.ptbCanvas.Width = width;
             this.canvas = new Bitmap(this.ptbCanvas.Width, this.ptbCanvas.Height);
-            this.ptbCanvas.Left = (this.Width - this.ptbCanvas.Width) / 2;
-            this.ptbCanvas.Top = (this.Height - this.ptbCanvas.Height) / 2;
+            recenterPtbCanvas();
         }
 
         private void stripMenuItemSaveAs_Click(object sender, EventArgs e)
@@ -107,6 +99,13 @@ namespace GraficacionAndresCastro
             saveFileDialog.Dispose();
         }
 
+        private void recenterPtbCanvas()
+        {
+            this.ptbCanvas.Left = (this.panelViewPort.Width - this.ptbCanvas.Width) / 2;
+            this.ptbCanvas.Top = (this.panelViewPort.Height - this.ptbCanvas.Height) / 2;
+        }
 
-}
+        private void panelViewPort_Resize(object sender, EventArgs e)
+        { recenterPtbCanvas(); }
+    }
 }
