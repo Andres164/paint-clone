@@ -241,18 +241,21 @@
             this.pixelToolStripMenuItem.Name = "pixelToolStripMenuItem";
             this.pixelToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.pixelToolStripMenuItem.Text = "Pixel";
+            this.pixelToolStripMenuItem.Click += new System.EventHandler(this.pixelToolStripMenuItem_Click);
             // 
             // rectaToolStripMenuItem
             // 
             this.rectaToolStripMenuItem.Name = "rectaToolStripMenuItem";
             this.rectaToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.rectaToolStripMenuItem.Text = "Recta";
+            this.rectaToolStripMenuItem.Click += new System.EventHandler(this.rectaToolStripMenuItem_Click);
             // 
             // circuloToolStripMenuItem
             // 
             this.circuloToolStripMenuItem.Name = "circuloToolStripMenuItem";
             this.circuloToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.circuloToolStripMenuItem.Text = "Circulo";
+            this.circuloToolStripMenuItem.Click += new System.EventHandler(this.circuloToolStripMenuItem_Click);
             // 
             // MainForm
             // 
