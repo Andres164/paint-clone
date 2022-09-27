@@ -3,10 +3,12 @@ namespace GraficacionAndresCastro
     public partial class MainForm : Form
     {
         enum Tools { Pixel, Recta, Circunferencia }
-        enum BrushSizes { Small = 1, Medium = 2, Big = 3 }
+        enum BrushSizes { Small, Medium, Big }
+        enum straigthStyles { Solid, Dotted, Dashed }
         Bitmap canvas;
         Tools selectedTool;
         BrushSizes selectedBrushSize;
+        straigthStyles selectedStraigth;
         Color selectedColor;
         List<Point> points;
         public MainForm()
@@ -14,6 +16,7 @@ namespace GraficacionAndresCastro
             InitializeComponent();
             canvas = new Bitmap(ptbCanvas.Width, ptbCanvas.Height);
             selectedBrushSize = BrushSizes.Small;
+            selectedStraigth = straigthStyles.Solid;
             selectedColor = Color.Black;
             points = new List<Point>(20);
 
@@ -37,7 +40,8 @@ namespace GraficacionAndresCastro
             int DX , DY, e, XIncrement, YIncrement;
             DX = points[1].X - points[0].X;
             DY = points[1].Y - points[0].Y;
-            if(DX >=0)
+            Point currentPoint;
+            if (DX >=0)
                 XIncrement = 1;
             else
             {
@@ -52,8 +56,10 @@ namespace GraficacionAndresCastro
                 DY = -DY;
                 YIncrement = -1;
             }
-            Point currentPoint = points[0];
+            currentPoint = points[0];
             drawPixel(currentPoint);
+            int iterations = 2, divisor = ((int)selectedBrushSize)*4 +1;
+            int skipedPixels = 0;
             if(DX >= DY)
             {
                 e = 2*DY - DX;
@@ -67,7 +73,34 @@ namespace GraficacionAndresCastro
                         currentPoint.Y += YIncrement;
                         e = e + 2 * (DY - DX);
                     }
-                    drawPixel(currentPoint);
+                    if (iterations % divisor == 0 || selectedStraigth == straigthStyles.Solid)
+                        drawPixel(currentPoint);
+                    else
+                    {
+                        //MessageBox.Show("iterations % divisor = " + Convert.ToString(iterations%divisor));
+                        skipedPixels++;
+                        //MessageBox.Show("Pixel skipped");
+                    }
+                    iterations++;
+                }
+                MessageBox.Show("iterations: " + Convert.ToString(iterations) + "\nskipedPixels: " + Convert.ToString(skipedPixels));
+            }
+            else
+            {
+                e = 2 * DX - DY;
+                while (currentPoint.Y != points[1].Y)
+                {
+                    currentPoint.Y += YIncrement;
+                    if (e < 0)
+                        e = e + 2 * DX;
+                    else
+                    {
+                        currentPoint.X += XIncrement;
+                        e = e + 2 * (DX - DY);
+                    }
+                    if (iterations % divisor != 0 || selectedStraigth == straigthStyles.Solid)
+                        drawPixel(currentPoint);
+                    iterations++;
                 }
             }
         }
@@ -120,7 +153,11 @@ namespace GraficacionAndresCastro
             this.canvas = resizedCanvas;
         }
         private void pixelToolStripMenuItem_Click(object sender, EventArgs e) { this.selectedTool = Tools.Pixel; }
-        private void rectaToolStripMenuItem_Click(object sender, EventArgs e) { this.selectedTool = Tools.Recta; }
+        private void rectaToolStripMenuItem_Click(object sender, EventArgs e) { this.selectedTool = Tools.Recta; this.grpBoxStyles.Enabled = true; }
         private void circuloToolStripMenuItem_Click(object sender, EventArgs e) { this.selectedTool = Tools.Circunferencia; }
+
+        private void btnSolid_Click(object sender, EventArgs e) { selectedStraigth = straigthStyles.Solid; }
+        private void btnDotted_Click(object sender, EventArgs e) { selectedStraigth = straigthStyles.Dotted; }
+        private void btnDashed_Click(object sender, EventArgs e) { selectedStraigth = straigthStyles.Dashed; }
     }
 }

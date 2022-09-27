@@ -49,11 +49,16 @@
             this.rectaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.circuloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.grpBoxStyles = new System.Windows.Forms.GroupBox();
+            this.btnSolid = new System.Windows.Forms.Button();
+            this.btnDotted = new System.Windows.Forms.Button();
+            this.btnDashed = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ptbCanvas)).BeginInit();
             this.grpBoxTools.SuspendLayout();
             this.grpBoxSize.SuspendLayout();
             this.grpBoxColors.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.grpBoxStyles.SuspendLayout();
             this.SuspendLayout();
             // 
             // ptbCanvas
@@ -73,12 +78,13 @@
             // grpBoxTools
             // 
             this.grpBoxTools.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.grpBoxTools.Controls.Add(this.grpBoxStyles);
             this.grpBoxTools.Controls.Add(this.grpBoxSize);
             this.grpBoxTools.Controls.Add(this.grpBoxColors);
             this.grpBoxTools.Dock = System.Windows.Forms.DockStyle.Top;
             this.grpBoxTools.Location = new System.Drawing.Point(0, 24);
             this.grpBoxTools.Name = "grpBoxTools";
-            this.grpBoxTools.Size = new System.Drawing.Size(871, 100);
+            this.grpBoxTools.Size = new System.Drawing.Size(871, 105);
             this.grpBoxTools.TabIndex = 1;
             this.grpBoxTools.TabStop = false;
             // 
@@ -89,7 +95,7 @@
             this.grpBoxSize.Controls.Add(this.btnBrushSize3);
             this.grpBoxSize.Controls.Add(this.btnBrushSize2);
             this.grpBoxSize.Controls.Add(this.btnBrushSize1);
-            this.grpBoxSize.Location = new System.Drawing.Point(493, 12);
+            this.grpBoxSize.Location = new System.Drawing.Point(519, 13);
             this.grpBoxSize.Name = "grpBoxSize";
             this.grpBoxSize.Size = new System.Drawing.Size(127, 81);
             this.grpBoxSize.TabIndex = 3;
@@ -138,7 +144,7 @@
             this.grpBoxColors.Controls.Add(this.btnBlue);
             this.grpBoxColors.Controls.Add(this.btnColorPalette);
             this.grpBoxColors.Controls.Add(this.btnSelectedColor);
-            this.grpBoxColors.Location = new System.Drawing.Point(633, 12);
+            this.grpBoxColors.Location = new System.Drawing.Point(652, 13);
             this.grpBoxColors.Name = "grpBoxColors";
             this.grpBoxColors.Size = new System.Drawing.Size(207, 81);
             this.grpBoxColors.TabIndex = 2;
@@ -257,6 +263,53 @@
             this.circuloToolStripMenuItem.Text = "Circulo";
             this.circuloToolStripMenuItem.Click += new System.EventHandler(this.circuloToolStripMenuItem_Click);
             // 
+            // grpBoxStyles
+            // 
+            this.grpBoxStyles.Controls.Add(this.btnDashed);
+            this.grpBoxStyles.Controls.Add(this.btnDotted);
+            this.grpBoxStyles.Controls.Add(this.btnSolid);
+            this.grpBoxStyles.Enabled = false;
+            this.grpBoxStyles.Location = new System.Drawing.Point(411, 13);
+            this.grpBoxStyles.Name = "grpBoxStyles";
+            this.grpBoxStyles.Size = new System.Drawing.Size(102, 81);
+            this.grpBoxStyles.TabIndex = 3;
+            this.grpBoxStyles.TabStop = false;
+            this.grpBoxStyles.Text = "Estilos";
+            // 
+            // btnSolid
+            // 
+            this.btnSolid.BackColor = System.Drawing.Color.White;
+            this.btnSolid.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnSolid.Image = ((System.Drawing.Image)(resources.GetObject("btnSolid.Image")));
+            this.btnSolid.Location = new System.Drawing.Point(6, 16);
+            this.btnSolid.Name = "btnSolid";
+            this.btnSolid.Size = new System.Drawing.Size(90, 19);
+            this.btnSolid.TabIndex = 8;
+            this.btnSolid.UseVisualStyleBackColor = false;
+            this.btnSolid.Click += new System.EventHandler(this.btnSolid_Click);
+            // 
+            // btnDotted
+            // 
+            this.btnDotted.BackColor = System.Drawing.Color.White;
+            this.btnDotted.Image = ((System.Drawing.Image)(resources.GetObject("btnDotted.Image")));
+            this.btnDotted.Location = new System.Drawing.Point(6, 35);
+            this.btnDotted.Name = "btnDotted";
+            this.btnDotted.Size = new System.Drawing.Size(90, 19);
+            this.btnDotted.TabIndex = 9;
+            this.btnDotted.UseVisualStyleBackColor = false;
+            this.btnDotted.Click += new System.EventHandler(this.btnDotted_Click);
+            // 
+            // btnDashed
+            // 
+            this.btnDashed.BackColor = System.Drawing.Color.White;
+            this.btnDashed.Image = ((System.Drawing.Image)(resources.GetObject("btnDashed.Image")));
+            this.btnDashed.Location = new System.Drawing.Point(6, 54);
+            this.btnDashed.Name = "btnDashed";
+            this.btnDashed.Size = new System.Drawing.Size(90, 19);
+            this.btnDashed.TabIndex = 10;
+            this.btnDashed.UseVisualStyleBackColor = false;
+            this.btnDashed.Click += new System.EventHandler(this.btnDashed_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -275,6 +328,7 @@
             this.grpBoxColors.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.grpBoxStyles.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -302,5 +356,9 @@
         private ToolStripMenuItem rectaToolStripMenuItem;
         private ToolStripMenuItem circuloToolStripMenuItem;
         private ColorDialog colorDialog;
+        private GroupBox grpBoxStyles;
+        private Button btnDashed;
+        private Button btnDotted;
+        private Button btnSolid;
     }
 }
