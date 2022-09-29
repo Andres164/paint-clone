@@ -58,8 +58,7 @@ namespace GraficacionAndresCastro
             }
             currentPoint = points[0];
             drawPixel(currentPoint);
-            int iterations = 2, divisor = ((int)selectedBrushSize)*4 +1;
-            int skipedPixels = 0;
+            int iterations = 1, divisor = (int)selectedBrushSize * 4 + 2;
             if(DX >= DY)
             {
                 e = 2*DY - DX;
@@ -73,17 +72,25 @@ namespace GraficacionAndresCastro
                         currentPoint.Y += YIncrement;
                         e = e + 2 * (DY - DX);
                     }
-                    if (iterations % divisor == 0 || selectedStraigth == straigthStyles.Solid)
-                        drawPixel(currentPoint);
-                    else
+                    switch(selectedStraigth)
                     {
-                        //MessageBox.Show("iterations % divisor = " + Convert.ToString(iterations%divisor));
-                        skipedPixels++;
-                        //MessageBox.Show("Pixel skipped");
+                        case straigthStyles.Dotted:
+                            if (iterations % divisor == 0)
+                                drawPixel(currentPoint);
+                            break;
+                        case straigthStyles.Dashed:
+                            if (selectedBrushSize == BrushSizes.Small && iterations % 5 != 0)
+                                drawPixel(currentPoint);
+                            else if(selectedBrushSize != BrushSizes.Small && iterations % 10 == iterations % 20)
+                                drawPixel(currentPoint);
+                            break;
+                        default:
+                            drawPixel(currentPoint);
+                            break;
+
                     }
                     iterations++;
                 }
-                MessageBox.Show("iterations: " + Convert.ToString(iterations) + "\nskipedPixels: " + Convert.ToString(skipedPixels));
             }
             else
             {
@@ -98,8 +105,23 @@ namespace GraficacionAndresCastro
                         currentPoint.X += XIncrement;
                         e = e + 2 * (DX - DY);
                     }
-                    if (iterations % divisor != 0 || selectedStraigth == straigthStyles.Solid)
-                        drawPixel(currentPoint);
+                    switch (selectedStraigth)
+                    {
+                        case straigthStyles.Dotted:
+                            if (iterations % divisor == 0)
+                                drawPixel(currentPoint);
+                            break;
+                        case straigthStyles.Dashed:
+                            if (selectedBrushSize == BrushSizes.Small && iterations % 5 != 0)
+                                drawPixel(currentPoint);
+                            else if (selectedBrushSize != BrushSizes.Small && iterations % 10 == iterations % 20)
+                                drawPixel(currentPoint);
+                            break;
+                        default:
+                            drawPixel(currentPoint);
+                            break;
+
+                    }
                     iterations++;
                 }
             }
@@ -146,13 +168,8 @@ namespace GraficacionAndresCastro
         private void btnBrushSize1_Click(object sender, EventArgs e) { selectedBrushSize = BrushSizes.Small; }
         private void btnBrushSize2_Click(object sender, EventArgs e) { selectedBrushSize = BrushSizes.Medium; }
         private void btnBrushSize3_Click(object sender, EventArgs e) { selectedBrushSize = BrushSizes.Big; }
-        private void ptbCanvas_Resize(object sender, EventArgs e)
-        {
-            Bitmap resizedCanvas = new Bitmap(this.canvas, this.ptbCanvas.Width, this.ptbCanvas.Height);
-            this.canvas.Dispose();
-            this.canvas = resizedCanvas;
-        }
-        private void pixelToolStripMenuItem_Click(object sender, EventArgs e) { this.selectedTool = Tools.Pixel; }
+        private void ptbCanvas_Resize(object sender, EventArgs e) { this.canvas = new Bitmap(this.canvas, this.ptbCanvas.Width, this.ptbCanvas.Height); }
+        private void pixelToolStripMenuItem_Click(object sender, EventArgs e) { this.selectedTool = Tools.Pixel; this.grpBoxStyles.Enabled = false; }
         private void rectaToolStripMenuItem_Click(object sender, EventArgs e) { this.selectedTool = Tools.Recta; this.grpBoxStyles.Enabled = true; }
         private void circuloToolStripMenuItem_Click(object sender, EventArgs e) { this.selectedTool = Tools.Circunferencia; }
 

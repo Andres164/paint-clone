@@ -31,6 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.ptbCanvas = new System.Windows.Forms.PictureBox();
             this.grpBoxTools = new System.Windows.Forms.GroupBox();
+            this.grpBoxStyles = new System.Windows.Forms.GroupBox();
+            this.btnDashed = new System.Windows.Forms.Button();
+            this.btnDotted = new System.Windows.Forms.Button();
+            this.btnSolid = new System.Windows.Forms.Button();
             this.grpBoxSize = new System.Windows.Forms.GroupBox();
             this.btnBrushSize3 = new System.Windows.Forms.Button();
             this.btnBrushSize2 = new System.Windows.Forms.Button();
@@ -49,16 +53,12 @@
             this.rectaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.circuloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
-            this.grpBoxStyles = new System.Windows.Forms.GroupBox();
-            this.btnSolid = new System.Windows.Forms.Button();
-            this.btnDotted = new System.Windows.Forms.Button();
-            this.btnDashed = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ptbCanvas)).BeginInit();
             this.grpBoxTools.SuspendLayout();
+            this.grpBoxStyles.SuspendLayout();
             this.grpBoxSize.SuspendLayout();
             this.grpBoxColors.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.grpBoxStyles.SuspendLayout();
             this.SuspendLayout();
             // 
             // ptbCanvas
@@ -87,6 +87,54 @@
             this.grpBoxTools.Size = new System.Drawing.Size(871, 105);
             this.grpBoxTools.TabIndex = 1;
             this.grpBoxTools.TabStop = false;
+            // 
+            // grpBoxStyles
+            // 
+            this.grpBoxStyles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpBoxStyles.Controls.Add(this.btnDashed);
+            this.grpBoxStyles.Controls.Add(this.btnDotted);
+            this.grpBoxStyles.Controls.Add(this.btnSolid);
+            this.grpBoxStyles.Enabled = false;
+            this.grpBoxStyles.Location = new System.Drawing.Point(411, 13);
+            this.grpBoxStyles.Name = "grpBoxStyles";
+            this.grpBoxStyles.Size = new System.Drawing.Size(102, 81);
+            this.grpBoxStyles.TabIndex = 3;
+            this.grpBoxStyles.TabStop = false;
+            this.grpBoxStyles.Text = "Estilos";
+            // 
+            // btnDashed
+            // 
+            this.btnDashed.BackColor = System.Drawing.Color.White;
+            this.btnDashed.Image = ((System.Drawing.Image)(resources.GetObject("btnDashed.Image")));
+            this.btnDashed.Location = new System.Drawing.Point(6, 54);
+            this.btnDashed.Name = "btnDashed";
+            this.btnDashed.Size = new System.Drawing.Size(90, 19);
+            this.btnDashed.TabIndex = 10;
+            this.btnDashed.UseVisualStyleBackColor = false;
+            this.btnDashed.Click += new System.EventHandler(this.btnDashed_Click);
+            // 
+            // btnDotted
+            // 
+            this.btnDotted.BackColor = System.Drawing.Color.White;
+            this.btnDotted.Image = ((System.Drawing.Image)(resources.GetObject("btnDotted.Image")));
+            this.btnDotted.Location = new System.Drawing.Point(6, 35);
+            this.btnDotted.Name = "btnDotted";
+            this.btnDotted.Size = new System.Drawing.Size(90, 19);
+            this.btnDotted.TabIndex = 9;
+            this.btnDotted.UseVisualStyleBackColor = false;
+            this.btnDotted.Click += new System.EventHandler(this.btnDotted_Click);
+            // 
+            // btnSolid
+            // 
+            this.btnSolid.BackColor = System.Drawing.Color.White;
+            this.btnSolid.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnSolid.Image = ((System.Drawing.Image)(resources.GetObject("btnSolid.Image")));
+            this.btnSolid.Location = new System.Drawing.Point(6, 16);
+            this.btnSolid.Name = "btnSolid";
+            this.btnSolid.Size = new System.Drawing.Size(90, 19);
+            this.btnSolid.TabIndex = 8;
+            this.btnSolid.UseVisualStyleBackColor = false;
+            this.btnSolid.Click += new System.EventHandler(this.btnSolid_Click);
             // 
             // grpBoxSize
             // 
@@ -263,53 +311,6 @@
             this.circuloToolStripMenuItem.Text = "Circulo";
             this.circuloToolStripMenuItem.Click += new System.EventHandler(this.circuloToolStripMenuItem_Click);
             // 
-            // grpBoxStyles
-            // 
-            this.grpBoxStyles.Controls.Add(this.btnDashed);
-            this.grpBoxStyles.Controls.Add(this.btnDotted);
-            this.grpBoxStyles.Controls.Add(this.btnSolid);
-            this.grpBoxStyles.Enabled = false;
-            this.grpBoxStyles.Location = new System.Drawing.Point(411, 13);
-            this.grpBoxStyles.Name = "grpBoxStyles";
-            this.grpBoxStyles.Size = new System.Drawing.Size(102, 81);
-            this.grpBoxStyles.TabIndex = 3;
-            this.grpBoxStyles.TabStop = false;
-            this.grpBoxStyles.Text = "Estilos";
-            // 
-            // btnSolid
-            // 
-            this.btnSolid.BackColor = System.Drawing.Color.White;
-            this.btnSolid.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnSolid.Image = ((System.Drawing.Image)(resources.GetObject("btnSolid.Image")));
-            this.btnSolid.Location = new System.Drawing.Point(6, 16);
-            this.btnSolid.Name = "btnSolid";
-            this.btnSolid.Size = new System.Drawing.Size(90, 19);
-            this.btnSolid.TabIndex = 8;
-            this.btnSolid.UseVisualStyleBackColor = false;
-            this.btnSolid.Click += new System.EventHandler(this.btnSolid_Click);
-            // 
-            // btnDotted
-            // 
-            this.btnDotted.BackColor = System.Drawing.Color.White;
-            this.btnDotted.Image = ((System.Drawing.Image)(resources.GetObject("btnDotted.Image")));
-            this.btnDotted.Location = new System.Drawing.Point(6, 35);
-            this.btnDotted.Name = "btnDotted";
-            this.btnDotted.Size = new System.Drawing.Size(90, 19);
-            this.btnDotted.TabIndex = 9;
-            this.btnDotted.UseVisualStyleBackColor = false;
-            this.btnDotted.Click += new System.EventHandler(this.btnDotted_Click);
-            // 
-            // btnDashed
-            // 
-            this.btnDashed.BackColor = System.Drawing.Color.White;
-            this.btnDashed.Image = ((System.Drawing.Image)(resources.GetObject("btnDashed.Image")));
-            this.btnDashed.Location = new System.Drawing.Point(6, 54);
-            this.btnDashed.Name = "btnDashed";
-            this.btnDashed.Size = new System.Drawing.Size(90, 19);
-            this.btnDashed.TabIndex = 10;
-            this.btnDashed.UseVisualStyleBackColor = false;
-            this.btnDashed.Click += new System.EventHandler(this.btnDashed_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -324,11 +325,11 @@
             this.Text = "Elaborado por Andres Castro";
             ((System.ComponentModel.ISupportInitialize)(this.ptbCanvas)).EndInit();
             this.grpBoxTools.ResumeLayout(false);
+            this.grpBoxStyles.ResumeLayout(false);
             this.grpBoxSize.ResumeLayout(false);
             this.grpBoxColors.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.grpBoxStyles.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
