@@ -73,6 +73,7 @@
             this.ptbCanvas.TabIndex = 0;
             this.ptbCanvas.TabStop = false;
             this.ptbCanvas.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ptbCanvas_MouseClick);
+            this.ptbCanvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ptbCanvas_MouseMove);
             this.ptbCanvas.Resize += new System.EventHandler(this.ptbCanvas_Resize);
             // 
             // grpBoxTools
@@ -323,6 +324,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "Elaborado por Andres Castro";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.ptbCanvas)).EndInit();
             this.grpBoxTools.ResumeLayout(false);
             this.grpBoxStyles.ResumeLayout(false);

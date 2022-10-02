@@ -21,6 +21,7 @@ namespace GraficacionAndresCastro
             points = new List<Point>(20);
 
             this.btnSelectedColor.BackColor = selectedColor;
+            this.KeyPreview = true;
         }
         private void changeSelectedColor(object sender)
         {
@@ -28,15 +29,18 @@ namespace GraficacionAndresCastro
             this.selectedColor = senderBtn.BackColor;
             this.btnSelectedColor.BackColor = this.selectedColor;
         }
-        private void drawPixel(Point location)
+        private void drawPixelOnBitmap(ref Bitmap bitmap, Point location, Color color)
         {
             for (int i = 0; i <= (int)selectedBrushSize; i++)
                 for (int j = 0; j <= (int)selectedBrushSize; j++)
-                    canvas.SetPixel(location.X + i, location.Y + j, selectedColor);
-            this.ptbCanvas.Image = canvas;
+                {
+                    if(location.X+i >= 0  && location.X+i < canvas.Width && location.Y + j >= 0 && location.Y+j < canvas.Height)
+                        bitmap.SetPixel(location.X + i, location.Y + j, color);
+                }
         }
-        private void drawStraight(List<Point> points)
+        private void drawStraightOnBitmap(ref Bitmap bitmap, List<Point> points, Color color)
         {
+            drawPixelOnBitmap(ref bitmap, points[0], color);
             int DX , DY, e, XIncrement, YIncrement;
             DX = points[1].X - points[0].X;
             DY = points[1].Y - points[0].Y;
@@ -57,7 +61,7 @@ namespace GraficacionAndresCastro
                 YIncrement = -1;
             }
             currentPoint = points[0];
-            drawPixel(currentPoint);
+            drawPixelOnBitmap(ref bitmap, currentPoint, color);
             int iterations = 1, divisor = (int)selectedBrushSize * 4 + 2;
             if(DX >= DY)
             {
@@ -76,16 +80,16 @@ namespace GraficacionAndresCastro
                     {
                         case straigthStyles.Dotted:
                             if (iterations % divisor == 0)
-                                drawPixel(currentPoint);
+                                drawPixelOnBitmap(ref bitmap, currentPoint, color);
                             break;
                         case straigthStyles.Dashed:
                             if (selectedBrushSize == BrushSizes.Small && iterations % 5 != 0)
-                                drawPixel(currentPoint);
+                                drawPixelOnBitmap(ref bitmap, currentPoint, color);
                             else if(selectedBrushSize != BrushSizes.Small && iterations % 10 == iterations % 20)
-                                drawPixel(currentPoint);
+                                drawPixelOnBitmap(ref bitmap, currentPoint, color);
                             break;
                         default:
-                            drawPixel(currentPoint);
+                            drawPixelOnBitmap(ref bitmap, currentPoint, color);
                             break;
 
                     }
@@ -109,18 +113,17 @@ namespace GraficacionAndresCastro
                     {
                         case straigthStyles.Dotted:
                             if (iterations % divisor == 0)
-                                drawPixel(currentPoint);
+                                drawPixelOnBitmap(ref bitmap, currentPoint, color);
                             break;
                         case straigthStyles.Dashed:
                             if (selectedBrushSize == BrushSizes.Small && iterations % 5 != 0)
-                                drawPixel(currentPoint);
+                                drawPixelOnBitmap(ref bitmap, currentPoint, color);
                             else if (selectedBrushSize != BrushSizes.Small && iterations % 10 == iterations % 20)
-                                drawPixel(currentPoint);
+                                drawPixelOnBitmap(ref bitmap, currentPoint, color);
                             break;
                         default:
-                            drawPixel(currentPoint);
+                            drawPixelOnBitmap(ref bitmap, currentPoint, color);
                             break;
-
                     }
                     iterations++;
                 }
@@ -135,15 +138,16 @@ namespace GraficacionAndresCastro
             switch(this.selectedTool)
             {
                 case Tools.Pixel:
-                    drawPixel(e.Location);
+                    drawPixelOnBitmap(ref this.canvas, e.Location, this.selectedColor);
+                    this.ptbCanvas.Image = this.canvas;
                     break;
                 case Tools.Recta:
                     points.Add(e.Location);
-                    drawPixel(e.Location);
                     if (points.Count == 2)
                     {
-                        drawStraight(points);
+                        drawStraightOnBitmap(ref this.canvas, points, this.selectedColor);
                         points.Clear();
+                        this.ptbCanvas.Image = this.canvas;
                     }
                     break;
                 case Tools.Circunferencia:
@@ -176,5 +180,27 @@ namespace GraficacionAndresCastro
         private void btnSolid_Click(object sender, EventArgs e) { selectedStraigth = straigthStyles.Solid; }
         private void btnDotted_Click(object sender, EventArgs e) { selectedStraigth = straigthStyles.Dotted; }
         private void btnDashed_Click(object sender, EventArgs e) { selectedStraigth = straigthStyles.Dashed; }
+        private void ptbCanvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (this.points.Count > 0)
+            {
+                this.ptbCanvas.Image = this.canvas;
+
+                Bitmap tempCanvas = (Bitmap)this.canvas.Clone();
+                List<Point> prevewPoints = new List<Point>();
+                prevewPoints.Add(this.points[0]);
+                prevewPoints.Add(e.Location);
+                drawStraightOnBitmap(ref tempCanvas, prevewPoints, Color.LightGray);
+                this.ptbCanvas.Image = tempCanvas;
+            }
+        }
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape && this.points.Count > 0)
+            {
+                this.points.Clear();
+                this.ptbCanvas.Image = this.canvas;
+            }
+        }
     }
 }
