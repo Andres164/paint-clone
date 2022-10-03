@@ -73,6 +73,7 @@
             this.ptbCanvas.TabIndex = 0;
             this.ptbCanvas.TabStop = false;
             this.ptbCanvas.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ptbCanvas_MouseClick);
+            this.ptbCanvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ptbCanvas_MouseDown);
             this.ptbCanvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ptbCanvas_MouseMove);
             this.ptbCanvas.Resize += new System.EventHandler(this.ptbCanvas_Resize);
             // 

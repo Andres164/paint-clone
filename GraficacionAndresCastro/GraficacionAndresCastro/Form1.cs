@@ -11,6 +11,7 @@ namespace GraficacionAndresCastro
         straigthStyles selectedStraigth;
         Color selectedColor;
         List<Point> points;
+        bool isLeftClickPressed;
         public MainForm()
         {
             InitializeComponent();
@@ -19,6 +20,7 @@ namespace GraficacionAndresCastro
             selectedStraigth = straigthStyles.Solid;
             selectedColor = Color.Black;
             points = new List<Point>(20);
+            isLeftClickPressed = false;
 
             this.btnSelectedColor.BackColor = selectedColor;
             this.KeyPreview = true;
@@ -154,6 +156,7 @@ namespace GraficacionAndresCastro
                     drawCircumference();
                     break;
             }
+            this.isLeftClickPressed = false;
         }
         private void btnBlue_Click(object sender, EventArgs e) { changeSelectedColor(sender); }
         private void btnLigthBlue_Click(object sender, EventArgs e) { changeSelectedColor(sender); }
@@ -193,6 +196,11 @@ namespace GraficacionAndresCastro
                 drawStraightOnBitmap(ref tempCanvas, prevewPoints, Color.LightGray);
                 this.ptbCanvas.Image = tempCanvas;
             }
+            if(this.selectedTool == Tools.Pixel && isLeftClickPressed)
+            {
+                drawPixelOnBitmap(ref this.canvas, e.Location, this.selectedColor);
+                this.ptbCanvas.Image = this.canvas;
+            }
         }
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
@@ -202,5 +210,7 @@ namespace GraficacionAndresCastro
                 this.ptbCanvas.Image = this.canvas;
             }
         }
+
+        private void ptbCanvas_MouseDown(object sender, MouseEventArgs e) { this.isLeftClickPressed = true; }
     }
 }
