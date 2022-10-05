@@ -53,6 +53,8 @@
             this.rectaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.circuloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.poligonoIrregularToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripTxtBoxSides = new System.Windows.Forms.ToolStripTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.ptbCanvas)).BeginInit();
             this.grpBoxTools.SuspendLayout();
             this.grpBoxStyles.SuspendLayout();
@@ -285,7 +287,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.pixelToolStripMenuItem,
             this.rectaToolStripMenuItem,
-            this.circuloToolStripMenuItem});
+            this.circuloToolStripMenuItem,
+            this.poligonoIrregularToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(871, 24);
@@ -312,6 +315,22 @@
             this.circuloToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.circuloToolStripMenuItem.Text = "Circulo";
             this.circuloToolStripMenuItem.Click += new System.EventHandler(this.circuloToolStripMenuItem_Click);
+            // 
+            // poligonoIrregularToolStripMenuItem
+            // 
+            this.poligonoIrregularToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripTxtBoxSides});
+            this.poligonoIrregularToolStripMenuItem.Name = "poligonoIrregularToolStripMenuItem";
+            this.poligonoIrregularToolStripMenuItem.Size = new System.Drawing.Size(114, 20);
+            this.poligonoIrregularToolStripMenuItem.Text = "Poligono Irregular";
+            this.poligonoIrregularToolStripMenuItem.Click += new System.EventHandler(this.poligonoIrregularToolStripMenuItem_Click);
+            // 
+            // toolStripTxtBoxSides
+            // 
+            this.toolStripTxtBoxSides.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.toolStripTxtBoxSides.Name = "toolStripTxtBoxSides";
+            this.toolStripTxtBoxSides.Size = new System.Drawing.Size(100, 23);
+            this.toolStripTxtBoxSides.Text = "# de Lados";
             // 
             // MainForm
             // 
@@ -364,5 +383,7 @@
         private Button btnDashed;
         private Button btnDotted;
         private Button btnSolid;
+        private ToolStripMenuItem poligonoIrregularToolStripMenuItem;
+        private ToolStripTextBox toolStripTxtBoxSides;
     }
 }

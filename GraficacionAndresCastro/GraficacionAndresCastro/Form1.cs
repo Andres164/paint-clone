@@ -2,7 +2,7 @@ namespace GraficacionAndresCastro
 {
     public partial class MainForm : Form
     {
-        enum Tools { Pixel, Recta, Circunferencia }
+        enum Tools { Pixel, Straight, Circumference, IrregularPolygon }
         enum BrushSizes { Small, Medium, Big }
         enum straigthStyles { Solid, Dotted, Dashed }
         Bitmap canvas;
@@ -24,6 +24,15 @@ namespace GraficacionAndresCastro
 
             this.btnSelectedColor.BackColor = selectedColor;
             this.KeyPreview = true;
+        }
+        private bool isStringOnlyNumbers(string text)
+        {
+            for(int i = 0; i < text.Length; i++)
+            {
+                if (text[i] < '0' || text[i] > '9')
+                    return false;
+            }
+            return true;
         }
         private void changeSelectedColor(object sender)
         {
@@ -135,6 +144,17 @@ namespace GraficacionAndresCastro
         {
 
         }
+        private void drawIrregularPolygonOnBitmap(ref Bitmap bitmap, List<Point> points, Color color)
+        {
+            for(int i = 0; i < points.Count; i++)
+            {
+                List<Point> straightPoints = new List<Point>();
+                straightPoints.Add(points[i]);
+                int j = i < points.Count - 1 ? i+1 : 0;
+                straightPoints.Add(points[j]);
+                drawStraightOnBitmap(ref bitmap, straightPoints, color);
+            }
+        }
         private void ptbCanvas_MouseClick(object sender, MouseEventArgs e)
         {
             switch(this.selectedTool)
@@ -143,7 +163,7 @@ namespace GraficacionAndresCastro
                     drawPixelOnBitmap(ref this.canvas, e.Location, this.selectedColor);
                     this.ptbCanvas.Image = this.canvas;
                     break;
-                case Tools.Recta:
+                case Tools.Straight:
                     points.Add(e.Location);
                     if (points.Count == 2)
                     {
@@ -152,8 +172,23 @@ namespace GraficacionAndresCastro
                         this.ptbCanvas.Image = this.canvas;
                     }
                     break;
-                case Tools.Circunferencia:
+                case Tools.Circumference:
                     drawCircumference();
+                    break;
+                case Tools.IrregularPolygon:
+                    string boxSidesText = this.toolStripTxtBoxSides.Text;
+                    this.points.Add(e.Location);
+                    if(!isStringOnlyNumbers(boxSidesText))
+                    {
+                        MessageBox.Show("El campo # de Lados solo acepta numeros enteros", "Valor Invalido", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        this.points.Clear();
+                    }
+                    else if (this.points.Count == Convert.ToInt32(boxSidesText))
+                    {
+                        drawIrregularPolygonOnBitmap(ref this.canvas, this.points, this.selectedColor);
+                        this.points.Clear();
+                        this.ptbCanvas.Image = this.canvas;
+                    }
                     break;
             }
             this.isLeftClickPressed = false;
@@ -175,17 +210,20 @@ namespace GraficacionAndresCastro
         private void btnBrushSize1_Click(object sender, EventArgs e) { selectedBrushSize = BrushSizes.Small; }
         private void btnBrushSize2_Click(object sender, EventArgs e) { selectedBrushSize = BrushSizes.Medium; }
         private void btnBrushSize3_Click(object sender, EventArgs e) { selectedBrushSize = BrushSizes.Big; }
-        private void ptbCanvas_Resize(object sender, EventArgs e) { this.canvas = new Bitmap(this.canvas, this.ptbCanvas.Width, this.ptbCanvas.Height); }
+
         private void pixelToolStripMenuItem_Click(object sender, EventArgs e) { this.selectedTool = Tools.Pixel; this.grpBoxStyles.Enabled = false; }
-        private void rectaToolStripMenuItem_Click(object sender, EventArgs e) { this.selectedTool = Tools.Recta; this.grpBoxStyles.Enabled = true; }
-        private void circuloToolStripMenuItem_Click(object sender, EventArgs e) { this.selectedTool = Tools.Circunferencia; }
+        private void rectaToolStripMenuItem_Click(object sender, EventArgs e) { this.selectedTool = Tools.Straight; this.grpBoxStyles.Enabled = true; }
+        private void circuloToolStripMenuItem_Click(object sender, EventArgs e) { this.selectedTool = Tools.Circumference; }
+        private void poligonoIrregularToolStripMenuItem_Click(object sender, EventArgs e) { this.selectedTool = Tools.IrregularPolygon; this.grpBoxStyles.Enabled = true; }
 
         private void btnSolid_Click(object sender, EventArgs e) { selectedStraigth = straigthStyles.Solid; }
         private void btnDotted_Click(object sender, EventArgs e) { selectedStraigth = straigthStyles.Dotted; }
         private void btnDashed_Click(object sender, EventArgs e) { selectedStraigth = straigthStyles.Dashed; }
+
+        private void ptbCanvas_Resize(object sender, EventArgs e) { this.canvas = new Bitmap(this.canvas, this.ptbCanvas.Width, this.ptbCanvas.Height); }
         private void ptbCanvas_MouseMove(object sender, MouseEventArgs e)
         {
-            if (this.points.Count > 0)
+            if (this.selectedTool == Tools.Straight && this.points.Count > 0)
             {
                 this.ptbCanvas.Image = this.canvas;
 
@@ -202,6 +240,7 @@ namespace GraficacionAndresCastro
                 this.ptbCanvas.Image = this.canvas;
             }
         }
+        private void ptbCanvas_MouseDown(object sender, MouseEventArgs e) { this.isLeftClickPressed = true; }
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape && this.points.Count > 0)
@@ -211,6 +250,5 @@ namespace GraficacionAndresCastro
             }
         }
 
-        private void ptbCanvas_MouseDown(object sender, MouseEventArgs e) { this.isLeftClickPressed = true; }
     }
 }
