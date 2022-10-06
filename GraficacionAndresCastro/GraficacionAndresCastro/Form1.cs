@@ -40,6 +40,7 @@ namespace GraficacionAndresCastro
             this.selectedColor = senderBtn.BackColor;
             this.btnSelectedColor.BackColor = this.selectedColor;
         }
+
         private void drawPixelOnBitmap(ref Bitmap bitmap, Point location, Color color)
         {
             for (int i = 0; i <= (int)selectedBrushSize; i++)
@@ -155,9 +156,10 @@ namespace GraficacionAndresCastro
                 drawStraightOnBitmap(ref bitmap, straightPoints, color);
             }
         }
+
         private void ptbCanvas_MouseClick(object sender, MouseEventArgs e)
         {
-            switch(this.selectedTool)
+            switch (this.selectedTool)
             {
                 case Tools.Pixel:
                     drawPixelOnBitmap(ref this.canvas, e.Location, this.selectedColor);
@@ -177,8 +179,9 @@ namespace GraficacionAndresCastro
                     break;
                 case Tools.IrregularPolygon:
                     string boxSidesText = this.toolStripTxtBoxSides.Text;
+
                     this.points.Add(e.Location);
-                    if(!isStringOnlyNumbers(boxSidesText))
+                    if (!isStringOnlyNumbers(boxSidesText))
                     {
                         MessageBox.Show("El campo # de Lados solo acepta numeros enteros", "Valor Invalido", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         this.points.Clear();
@@ -193,6 +196,39 @@ namespace GraficacionAndresCastro
             }
             this.isLeftClickPressed = false;
         }
+        private void ptbCanvas_Resize(object sender, EventArgs e) { this.canvas = new Bitmap(this.canvas, this.ptbCanvas.Width, this.ptbCanvas.Height); }
+        private void ptbCanvas_MouseMove(object sender, MouseEventArgs e)
+        {
+            if(this.selectedTool == Tools.Pixel && isLeftClickPressed)
+            {
+                drawPixelOnBitmap(ref this.canvas, e.Location, this.selectedColor);
+                this.ptbCanvas.Image = this.canvas;
+            }
+            else if (this.selectedTool == Tools.Straight && this.points.Count > 0)
+            {
+                this.ptbCanvas.Image = this.canvas;
+
+                Bitmap tempCanvas = (Bitmap)this.canvas.Clone();
+                List<Point> prevewPoints = new List<Point>();
+                prevewPoints.Add(this.points[0]);
+                prevewPoints.Add(e.Location);
+                drawStraightOnBitmap(ref tempCanvas, prevewPoints, Color.LightGray);
+                this.ptbCanvas.Image = tempCanvas;
+            }
+            else if(this.selectedTool == Tools.IrregularPolygon && this.points.Count > 0)
+            {
+                this.ptbCanvas.Image = this.canvas;
+
+                Bitmap tempCanvas = (Bitmap)this.canvas.Clone();
+                List<Point> prevewPoints = new List<Point>(this.points);
+                prevewPoints.Add(e.Location);
+                drawIrregularPolygonOnBitmap(ref tempCanvas, prevewPoints, Color.LightGray);
+                
+                this.ptbCanvas.Image = tempCanvas;
+            }
+        }
+        private void ptbCanvas_MouseDown(object sender, MouseEventArgs e) { this.isLeftClickPressed = true; }
+
         private void btnBlue_Click(object sender, EventArgs e) { changeSelectedColor(sender); }
         private void btnLigthBlue_Click(object sender, EventArgs e) { changeSelectedColor(sender); }
         private void btnGreen_Click(object sender, EventArgs e) { changeSelectedColor(sender); }
@@ -213,34 +249,13 @@ namespace GraficacionAndresCastro
 
         private void pixelToolStripMenuItem_Click(object sender, EventArgs e) { this.selectedTool = Tools.Pixel; this.grpBoxStyles.Enabled = false; }
         private void rectaToolStripMenuItem_Click(object sender, EventArgs e) { this.selectedTool = Tools.Straight; this.grpBoxStyles.Enabled = true; }
-        private void circuloToolStripMenuItem_Click(object sender, EventArgs e) { this.selectedTool = Tools.Circumference; }
+        private void circuloToolStripMenuItem_Click(object sender, EventArgs e) { this.selectedTool = Tools.Circumference; this.grpBoxStyles.Enabled = true; }
         private void poligonoIrregularToolStripMenuItem_Click(object sender, EventArgs e) { this.selectedTool = Tools.IrregularPolygon; this.grpBoxStyles.Enabled = true; }
 
         private void btnSolid_Click(object sender, EventArgs e) { selectedStraigth = straigthStyles.Solid; }
         private void btnDotted_Click(object sender, EventArgs e) { selectedStraigth = straigthStyles.Dotted; }
         private void btnDashed_Click(object sender, EventArgs e) { selectedStraigth = straigthStyles.Dashed; }
 
-        private void ptbCanvas_Resize(object sender, EventArgs e) { this.canvas = new Bitmap(this.canvas, this.ptbCanvas.Width, this.ptbCanvas.Height); }
-        private void ptbCanvas_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (this.selectedTool == Tools.Straight && this.points.Count > 0)
-            {
-                this.ptbCanvas.Image = this.canvas;
-
-                Bitmap tempCanvas = (Bitmap)this.canvas.Clone();
-                List<Point> prevewPoints = new List<Point>();
-                prevewPoints.Add(this.points[0]);
-                prevewPoints.Add(e.Location);
-                drawStraightOnBitmap(ref tempCanvas, prevewPoints, Color.LightGray);
-                this.ptbCanvas.Image = tempCanvas;
-            }
-            if(this.selectedTool == Tools.Pixel && isLeftClickPressed)
-            {
-                drawPixelOnBitmap(ref this.canvas, e.Location, this.selectedColor);
-                this.ptbCanvas.Image = this.canvas;
-            }
-        }
-        private void ptbCanvas_MouseDown(object sender, MouseEventArgs e) { this.isLeftClickPressed = true; }
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape && this.points.Count > 0)
