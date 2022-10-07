@@ -16,6 +16,7 @@ namespace GraficacionAndresCastro
         {
             InitializeComponent();
             canvas = new Bitmap(ptbCanvas.Width, ptbCanvas.Height);
+            this.ptbCanvas.Image = canvas;
             selectedBrushSize = BrushSizes.Small;
             selectedStraigth = straigthStyles.Solid;
             selectedColor = Color.Black;
@@ -181,6 +182,8 @@ namespace GraficacionAndresCastro
                     string boxSidesText = this.toolStripTxtBoxSides.Text;
 
                     this.points.Add(e.Location);
+
+                    this.canvas = (Bitmap)this.ptbCanvas.Image;
                     if (!isStringOnlyNumbers(boxSidesText))
                     {
                         MessageBox.Show("El campo # de Lados solo acepta numeros enteros", "Valor Invalido", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -209,10 +212,10 @@ namespace GraficacionAndresCastro
                 this.ptbCanvas.Image = this.canvas;
 
                 Bitmap tempCanvas = (Bitmap)this.canvas.Clone();
-                List<Point> prevewPoints = new List<Point>();
-                prevewPoints.Add(this.points[0]);
-                prevewPoints.Add(e.Location);
-                drawStraightOnBitmap(ref tempCanvas, prevewPoints, Color.LightGray);
+                List<Point> previewPoints = new List<Point>();
+                previewPoints.Add(this.points[0]);
+                previewPoints.Add(e.Location);
+                drawStraightOnBitmap(ref tempCanvas, previewPoints, Color.LightGray);
                 this.ptbCanvas.Image = tempCanvas;
             }
             else if(this.selectedTool == Tools.IrregularPolygon && this.points.Count > 0)
@@ -220,10 +223,19 @@ namespace GraficacionAndresCastro
                 this.ptbCanvas.Image = this.canvas;
 
                 Bitmap tempCanvas = (Bitmap)this.canvas.Clone();
-                List<Point> prevewPoints = new List<Point>(this.points);
-                prevewPoints.Add(e.Location);
-                drawIrregularPolygonOnBitmap(ref tempCanvas, prevewPoints, Color.LightGray);
-                
+                List<Point> previewPoints = new List<Point>();
+                int sidesOfPolygon = Convert.ToInt32((this.toolStripTxtBoxSides.Text));
+
+                previewPoints.Add(this.points[this.points.Count-1]);
+                previewPoints.Add(e.Location);
+                drawStraightOnBitmap(ref tempCanvas, previewPoints, Color.LightGray);
+                if(this.points.Count == sidesOfPolygon-1)
+                {
+                    previewPoints[0] = this.points[0];
+                    drawStraightOnBitmap(ref tempCanvas, previewPoints, Color.LightGray);
+
+                }
+
                 this.ptbCanvas.Image = tempCanvas;
             }
         }
