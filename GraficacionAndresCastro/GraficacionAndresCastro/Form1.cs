@@ -2,7 +2,7 @@ namespace GraficacionAndresCastro
 {
     public partial class MainForm : Form
     {
-        enum Tools { Pixel, Straight, Circumference, IrregularPolygon }
+        enum Tools { Pixel, Straight, Circumference, IrregularPolygon, RegularPolygon }
         enum BrushSizes { Small, Medium, Big }
         enum straigthStyles { Solid, Dotted, Dashed }
         Bitmap canvas;
@@ -34,6 +34,10 @@ namespace GraficacionAndresCastro
                     return false;
             }
             return true;
+        }
+        private bool isValidNumberOfPolygonSides(string text)
+        {
+            return isStringOnlyNumbers(text) && Convert.ToInt32(text) > 2;
         }
         private void changeSelectedColor(object sender)
         {
@@ -157,6 +161,18 @@ namespace GraficacionAndresCastro
                 drawStraightOnBitmap(ref bitmap, straightPoints, color);
             }
         }
+        private void drawRegularPolygonOnBitmap(ref Bitmap bitmap, Point polygonCenter, Int16 polygonSides, Color color)
+        {
+            List<Point> points = new List<Point>();
+            double X, Y, radius = 30, verticesAngle = 360.0 / polygonSides;
+            for(double i = 0; i < 360; i += verticesAngle)
+            {
+                X = polygonCenter.X + radius * Math.Cos( (i + 90 * (polygonSides -2) / polygonSides ) * Math.PI / 180 );
+                Y = polygonCenter.Y + radius * Math.Sin( (i + 90 * (polygonSides -2) / polygonSides ) * Math.PI / 180 );
+                points.Add( new Point( Convert.ToInt32(X), Convert.ToInt32(Y) ) );
+            }
+            drawIrregularPolygonOnBitmap(ref bitmap, points, color);
+        }
 
         private void ptbCanvas_MouseClick(object sender, MouseEventArgs e)
         {
@@ -184,9 +200,9 @@ namespace GraficacionAndresCastro
                     this.points.Add(e.Location);
 
                     this.canvas = (Bitmap)this.ptbCanvas.Image;
-                    if (!isStringOnlyNumbers(boxSidesText))
+                    if (!isValidNumberOfPolygonSides(boxSidesText))
                     {
-                        MessageBox.Show("El campo # de Lados solo acepta numeros enteros", "Valor Invalido", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show("El campo # de Lados solo acepta numeros enteros mayores a 2", "Valor Invalido", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         this.points.Clear();
                     }
                     else if (this.points.Count == Convert.ToInt32(boxSidesText))
@@ -194,6 +210,17 @@ namespace GraficacionAndresCastro
                         drawIrregularPolygonOnBitmap(ref this.canvas, this.points, this.selectedColor);
                         this.points.Clear();
                         this.ptbCanvas.Image = this.canvas;
+                    }
+                    break;
+                case Tools.RegularPolygon:
+                    string regularPolyBoxSidesText = this.toolStripTxtBoxSidesRegularPoly.Text;
+
+                    if (!isValidNumberOfPolygonSides(regularPolyBoxSidesText))
+                        MessageBox.Show("El campo # de Lados solo acepta numeros enteros mayores a 2", "Valor Invalido", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    else
+                    {
+                        drawRegularPolygonOnBitmap(ref this.canvas, e.Location, Convert.ToInt16(regularPolyBoxSidesText), this.selectedColor);
+                        this.ptbCanvas.Image = (Image)this.canvas.Clone();
                     }
                     break;
             }
@@ -241,6 +268,14 @@ namespace GraficacionAndresCastro
         }
         private void ptbCanvas_MouseDown(object sender, MouseEventArgs e) { this.isLeftClickPressed = true; }
 
+        private void btnSolid_Click(object sender, EventArgs e) { selectedStraigth = straigthStyles.Solid; }
+        private void btnDotted_Click(object sender, EventArgs e) { selectedStraigth = straigthStyles.Dotted; }
+        private void btnDashed_Click(object sender, EventArgs e) { selectedStraigth = straigthStyles.Dashed; }
+
+        private void btnBrushSize1_Click(object sender, EventArgs e) { selectedBrushSize = BrushSizes.Small; }
+        private void btnBrushSize2_Click(object sender, EventArgs e) { selectedBrushSize = BrushSizes.Medium; }
+        private void btnBrushSize3_Click(object sender, EventArgs e) { selectedBrushSize = BrushSizes.Big; }
+
         private void btnBlue_Click(object sender, EventArgs e) { changeSelectedColor(sender); }
         private void btnLigthBlue_Click(object sender, EventArgs e) { changeSelectedColor(sender); }
         private void btnGreen_Click(object sender, EventArgs e) { changeSelectedColor(sender); }
@@ -255,18 +290,17 @@ namespace GraficacionAndresCastro
                 this.btnSelectedColor.BackColor = this.selectedColor;
             }
         }
-        private void btnBrushSize1_Click(object sender, EventArgs e) { selectedBrushSize = BrushSizes.Small; }
-        private void btnBrushSize2_Click(object sender, EventArgs e) { selectedBrushSize = BrushSizes.Medium; }
-        private void btnBrushSize3_Click(object sender, EventArgs e) { selectedBrushSize = BrushSizes.Big; }
 
         private void pixelToolStripMenuItem_Click(object sender, EventArgs e) { this.selectedTool = Tools.Pixel; this.grpBoxStyles.Enabled = false; }
         private void rectaToolStripMenuItem_Click(object sender, EventArgs e) { this.selectedTool = Tools.Straight; this.grpBoxStyles.Enabled = true; }
         private void circuloToolStripMenuItem_Click(object sender, EventArgs e) { this.selectedTool = Tools.Circumference; this.grpBoxStyles.Enabled = true; }
         private void poligonoIrregularToolStripMenuItem_Click(object sender, EventArgs e) { this.selectedTool = Tools.IrregularPolygon; this.grpBoxStyles.Enabled = true; }
+        private void poligonoRegularToolStripMenuItem_Click(object sender, EventArgs e) { this.selectedTool = Tools.RegularPolygon; this.grpBoxStyles.Enabled = true;  }
+        private void trianguloToolStripMenuItem_Click(object sender, EventArgs e) { this.toolStripTxtBoxSidesRegularPoly.Text = "3"; }
+        private void cuadradoToolStripMenuItem_Click(object sender, EventArgs e) { this.toolStripTxtBoxSidesRegularPoly.Text = "4"; }
+        private void pentagonoToolStripMenuItem_Click(object sender, EventArgs e) { this.toolStripTxtBoxSidesRegularPoly.Text = "5"; }
+        private void hexagonoToolStripMenuItem_Click(object sender, EventArgs e) { this.toolStripTxtBoxSidesRegularPoly.Text = "6"; }
 
-        private void btnSolid_Click(object sender, EventArgs e) { selectedStraigth = straigthStyles.Solid; }
-        private void btnDotted_Click(object sender, EventArgs e) { selectedStraigth = straigthStyles.Dotted; }
-        private void btnDashed_Click(object sender, EventArgs e) { selectedStraigth = straigthStyles.Dashed; }
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {

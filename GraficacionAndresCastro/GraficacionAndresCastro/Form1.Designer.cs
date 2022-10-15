@@ -52,9 +52,15 @@
             this.pixelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rectaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.circuloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.poligonoIrregularToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTxtBoxSides = new System.Windows.Forms.ToolStripTextBox();
+            this.poligonoRegularToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.trianguloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cuadradoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pentagonoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hexagonoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripTxtBoxSidesRegularPoly = new System.Windows.Forms.ToolStripTextBox();
+            this.colorDialog = new System.Windows.Forms.ColorDialog();
             ((System.ComponentModel.ISupportInitialize)(this.ptbCanvas)).BeginInit();
             this.grpBoxTools.SuspendLayout();
             this.grpBoxStyles.SuspendLayout();
@@ -288,7 +294,8 @@
             this.pixelToolStripMenuItem,
             this.rectaToolStripMenuItem,
             this.circuloToolStripMenuItem,
-            this.poligonoIrregularToolStripMenuItem});
+            this.poligonoIrregularToolStripMenuItem,
+            this.poligonoRegularToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(871, 24);
@@ -330,7 +337,56 @@
             this.toolStripTxtBoxSides.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.toolStripTxtBoxSides.Name = "toolStripTxtBoxSides";
             this.toolStripTxtBoxSides.Size = new System.Drawing.Size(100, 23);
-            this.toolStripTxtBoxSides.Text = "# de Lados";
+            this.toolStripTxtBoxSides.Text = "# de lados";
+            // 
+            // poligonoRegularToolStripMenuItem
+            // 
+            this.poligonoRegularToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.trianguloToolStripMenuItem,
+            this.cuadradoToolStripMenuItem,
+            this.pentagonoToolStripMenuItem,
+            this.hexagonoToolStripMenuItem,
+            this.toolStripTxtBoxSidesRegularPoly});
+            this.poligonoRegularToolStripMenuItem.Name = "poligonoRegularToolStripMenuItem";
+            this.poligonoRegularToolStripMenuItem.Size = new System.Drawing.Size(110, 20);
+            this.poligonoRegularToolStripMenuItem.Text = "Poligono Regular";
+            this.poligonoRegularToolStripMenuItem.Click += new System.EventHandler(this.poligonoRegularToolStripMenuItem_Click);
+            // 
+            // trianguloToolStripMenuItem
+            // 
+            this.trianguloToolStripMenuItem.Name = "trianguloToolStripMenuItem";
+            this.trianguloToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.trianguloToolStripMenuItem.Text = "Triangulo";
+            this.trianguloToolStripMenuItem.Click += new System.EventHandler(this.trianguloToolStripMenuItem_Click);
+            // 
+            // cuadradoToolStripMenuItem
+            // 
+            this.cuadradoToolStripMenuItem.Name = "cuadradoToolStripMenuItem";
+            this.cuadradoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cuadradoToolStripMenuItem.Text = "Cuadrado";
+            this.cuadradoToolStripMenuItem.Click += new System.EventHandler(this.cuadradoToolStripMenuItem_Click);
+            // 
+            // pentagonoToolStripMenuItem
+            // 
+            this.pentagonoToolStripMenuItem.Name = "pentagonoToolStripMenuItem";
+            this.pentagonoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pentagonoToolStripMenuItem.Text = "Pentagono";
+            this.pentagonoToolStripMenuItem.Click += new System.EventHandler(this.pentagonoToolStripMenuItem_Click);
+            // 
+            // hexagonoToolStripMenuItem
+            // 
+            this.hexagonoToolStripMenuItem.Name = "hexagonoToolStripMenuItem";
+            this.hexagonoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.hexagonoToolStripMenuItem.Text = "Hexagono";
+            this.hexagonoToolStripMenuItem.Click += new System.EventHandler(this.hexagonoToolStripMenuItem_Click);
+            // 
+            // toolStripTxtBoxSidesRegularPoly
+            // 
+            this.toolStripTxtBoxSidesRegularPoly.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.toolStripTxtBoxSidesRegularPoly.MaxLength = 3;
+            this.toolStripTxtBoxSidesRegularPoly.Name = "toolStripTxtBoxSidesRegularPoly";
+            this.toolStripTxtBoxSidesRegularPoly.Size = new System.Drawing.Size(100, 23);
+            this.toolStripTxtBoxSidesRegularPoly.Text = "# de lados";
             // 
             // MainForm
             // 
@@ -385,5 +441,11 @@
         private Button btnSolid;
         private ToolStripMenuItem poligonoIrregularToolStripMenuItem;
         private ToolStripTextBox toolStripTxtBoxSides;
+        private ToolStripMenuItem poligonoRegularToolStripMenuItem;
+        private ToolStripMenuItem trianguloToolStripMenuItem;
+        private ToolStripMenuItem cuadradoToolStripMenuItem;
+        private ToolStripMenuItem pentagonoToolStripMenuItem;
+        private ToolStripMenuItem hexagonoToolStripMenuItem;
+        private ToolStripTextBox toolStripTxtBoxSidesRegularPoly;
     }
 }
