@@ -61,6 +61,7 @@
             this.hexagonoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTxtBoxSidesRegularPoly = new System.Windows.Forms.ToolStripTextBox();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.btnCleanCanvas = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ptbCanvas)).BeginInit();
             this.grpBoxTools.SuspendLayout();
             this.grpBoxStyles.SuspendLayout();
@@ -88,6 +89,7 @@
             // grpBoxTools
             // 
             this.grpBoxTools.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.grpBoxTools.Controls.Add(this.btnCleanCanvas);
             this.grpBoxTools.Controls.Add(this.grpBoxStyles);
             this.grpBoxTools.Controls.Add(this.grpBoxSize);
             this.grpBoxTools.Controls.Add(this.grpBoxColors);
@@ -355,28 +357,28 @@
             // trianguloToolStripMenuItem
             // 
             this.trianguloToolStripMenuItem.Name = "trianguloToolStripMenuItem";
-            this.trianguloToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.trianguloToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.trianguloToolStripMenuItem.Text = "Triangulo";
             this.trianguloToolStripMenuItem.Click += new System.EventHandler(this.trianguloToolStripMenuItem_Click);
             // 
             // cuadradoToolStripMenuItem
             // 
             this.cuadradoToolStripMenuItem.Name = "cuadradoToolStripMenuItem";
-            this.cuadradoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cuadradoToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.cuadradoToolStripMenuItem.Text = "Cuadrado";
             this.cuadradoToolStripMenuItem.Click += new System.EventHandler(this.cuadradoToolStripMenuItem_Click);
             // 
             // pentagonoToolStripMenuItem
             // 
             this.pentagonoToolStripMenuItem.Name = "pentagonoToolStripMenuItem";
-            this.pentagonoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pentagonoToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.pentagonoToolStripMenuItem.Text = "Pentagono";
             this.pentagonoToolStripMenuItem.Click += new System.EventHandler(this.pentagonoToolStripMenuItem_Click);
             // 
             // hexagonoToolStripMenuItem
             // 
             this.hexagonoToolStripMenuItem.Name = "hexagonoToolStripMenuItem";
-            this.hexagonoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.hexagonoToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.hexagonoToolStripMenuItem.Text = "Hexagono";
             this.hexagonoToolStripMenuItem.Click += new System.EventHandler(this.hexagonoToolStripMenuItem_Click);
             // 
@@ -387,6 +389,16 @@
             this.toolStripTxtBoxSidesRegularPoly.Name = "toolStripTxtBoxSidesRegularPoly";
             this.toolStripTxtBoxSidesRegularPoly.Size = new System.Drawing.Size(100, 23);
             this.toolStripTxtBoxSidesRegularPoly.Text = "# de lados";
+            // 
+            // btnCleanCanvas
+            // 
+            this.btnCleanCanvas.Location = new System.Drawing.Point(6, 47);
+            this.btnCleanCanvas.Name = "btnCleanCanvas";
+            this.btnCleanCanvas.Size = new System.Drawing.Size(92, 47);
+            this.btnCleanCanvas.TabIndex = 4;
+            this.btnCleanCanvas.Text = "Limpiar lienzo";
+            this.btnCleanCanvas.UseVisualStyleBackColor = true;
+            this.btnCleanCanvas.Click += new System.EventHandler(this.btnCleanCanvas_Click);
             // 
             // MainForm
             // 
@@ -447,5 +459,6 @@
         private ToolStripMenuItem pentagonoToolStripMenuItem;
         private ToolStripMenuItem hexagonoToolStripMenuItem;
         private ToolStripTextBox toolStripTxtBoxSidesRegularPoly;
+        private Button btnCleanCanvas;
     }
 }

@@ -146,9 +146,44 @@ namespace GraficacionAndresCastro
                 }
             }
         }
-        private void drawCircumference()
+        private void drawCircumference(ref Bitmap bitmap, Point center, Color color)
         {
+            int x, y, e;
+            x = 30; y = 0; e = 0;
+            while (y <= x)
+            {
+                Point pointToDraw = new Point(center.X + x, center.Y + y);
+                drawPixelOnBitmap(ref bitmap, pointToDraw, color);
+                pointToDraw.X = center.X - x;
+                pointToDraw.Y = center.Y + y;
+                drawPixelOnBitmap(ref bitmap, pointToDraw, color);
+                pointToDraw.X = center.X + x;
+                pointToDraw.Y = center.Y - y;
+                drawPixelOnBitmap(ref bitmap, pointToDraw, color);
+                pointToDraw.X = center.X - x;
+                pointToDraw.Y = center.Y - y;
+                drawPixelOnBitmap(ref bitmap, pointToDraw, color);
+                pointToDraw.X = center.X + y;
+                pointToDraw.Y = center.Y + x;
+                drawPixelOnBitmap(ref bitmap, pointToDraw, color);
+                pointToDraw.X = center.X - y;
+                pointToDraw.Y = center.Y + x;
+                drawPixelOnBitmap(ref bitmap, pointToDraw, color);
+                pointToDraw.X = center.X + y;
+                pointToDraw.Y = center.Y - x;
+                drawPixelOnBitmap(ref bitmap, pointToDraw, color);
+                pointToDraw.X = center.X - y;
+                pointToDraw.Y = center.Y - x;
+                drawPixelOnBitmap(ref bitmap, pointToDraw, color);
 
+                e = e + 2 * y + 1;
+                y = y + 1;
+                if ( ( 2 * e ) > ( 2 * x  -1 ) )
+                {   
+                    x = x - 1;
+                    e = e - 2 * x + 1;
+                }
+            }
         }
         private void drawIrregularPolygonOnBitmap(ref Bitmap bitmap, List<Point> points, Color color)
         {
@@ -192,7 +227,8 @@ namespace GraficacionAndresCastro
                     }
                     break;
                 case Tools.Circumference:
-                    drawCircumference();
+                    drawCircumference(ref this.canvas, e.Location, this.selectedColor);
+                    this.ptbCanvas.Image = (Image)this.canvas;
                     break;
                 case Tools.IrregularPolygon:
                     string boxSidesText = this.toolStripTxtBoxSides.Text;
@@ -311,5 +347,10 @@ namespace GraficacionAndresCastro
             }
         }
 
+        private void btnCleanCanvas_Click(object sender, EventArgs e)
+        {
+            this.canvas = new Bitmap(ptbCanvas.Width, ptbCanvas.Height);
+            this.ptbCanvas.Image = (Image)this.canvas;
+        }
     }
 }
