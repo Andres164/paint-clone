@@ -12,8 +12,8 @@
       }
     ],
     "additionalProbingPaths": [
-      "C:\\Users\\Baio\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\Baio\\.nuget\\packages"
+      "C:\\Users\\Acerita\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Acerita\\.nuget\\packages"
     ],
     "configProperties": {
       "Microsoft.NETCore.DotNetHostPolicy.SetAppPaths": true
