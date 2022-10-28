@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.ptbCanvas = new System.Windows.Forms.PictureBox();
             this.grpBoxTools = new System.Windows.Forms.GroupBox();
+            this.btnCleanCanvas = new System.Windows.Forms.Button();
             this.grpBoxStyles = new System.Windows.Forms.GroupBox();
             this.btnDashed = new System.Windows.Forms.Button();
             this.btnDotted = new System.Windows.Forms.Button();
@@ -61,7 +62,7 @@
             this.hexagonoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTxtBoxSidesRegularPoly = new System.Windows.Forms.ToolStripTextBox();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
-            this.btnCleanCanvas = new System.Windows.Forms.Button();
+            this.circunferenciaExamenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.ptbCanvas)).BeginInit();
             this.grpBoxTools.SuspendLayout();
             this.grpBoxStyles.SuspendLayout();
@@ -99,6 +100,16 @@
             this.grpBoxTools.Size = new System.Drawing.Size(871, 105);
             this.grpBoxTools.TabIndex = 1;
             this.grpBoxTools.TabStop = false;
+            // 
+            // btnCleanCanvas
+            // 
+            this.btnCleanCanvas.Location = new System.Drawing.Point(6, 47);
+            this.btnCleanCanvas.Name = "btnCleanCanvas";
+            this.btnCleanCanvas.Size = new System.Drawing.Size(92, 47);
+            this.btnCleanCanvas.TabIndex = 4;
+            this.btnCleanCanvas.Text = "Limpiar lienzo";
+            this.btnCleanCanvas.UseVisualStyleBackColor = true;
+            this.btnCleanCanvas.Click += new System.EventHandler(this.btnCleanCanvas_Click);
             // 
             // grpBoxStyles
             // 
@@ -297,7 +308,8 @@
             this.rectaToolStripMenuItem,
             this.circuloToolStripMenuItem,
             this.poligonoIrregularToolStripMenuItem,
-            this.poligonoRegularToolStripMenuItem});
+            this.poligonoRegularToolStripMenuItem,
+            this.circunferenciaExamenToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(871, 24);
@@ -390,15 +402,12 @@
             this.toolStripTxtBoxSidesRegularPoly.Size = new System.Drawing.Size(100, 23);
             this.toolStripTxtBoxSidesRegularPoly.Text = "# de lados";
             // 
-            // btnCleanCanvas
+            // circunferenciaExamenToolStripMenuItem
             // 
-            this.btnCleanCanvas.Location = new System.Drawing.Point(6, 47);
-            this.btnCleanCanvas.Name = "btnCleanCanvas";
-            this.btnCleanCanvas.Size = new System.Drawing.Size(92, 47);
-            this.btnCleanCanvas.TabIndex = 4;
-            this.btnCleanCanvas.Text = "Limpiar lienzo";
-            this.btnCleanCanvas.UseVisualStyleBackColor = true;
-            this.btnCleanCanvas.Click += new System.EventHandler(this.btnCleanCanvas_Click);
+            this.circunferenciaExamenToolStripMenuItem.Name = "circunferenciaExamenToolStripMenuItem";
+            this.circunferenciaExamenToolStripMenuItem.Size = new System.Drawing.Size(141, 20);
+            this.circunferenciaExamenToolStripMenuItem.Text = "Circunferencia examen";
+            this.circunferenciaExamenToolStripMenuItem.Click += new System.EventHandler(this.circunferenciaExamenToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -460,5 +469,6 @@
         private ToolStripMenuItem hexagonoToolStripMenuItem;
         private ToolStripTextBox toolStripTxtBoxSidesRegularPoly;
         private Button btnCleanCanvas;
+        private ToolStripMenuItem circunferenciaExamenToolStripMenuItem;
     }
 }
