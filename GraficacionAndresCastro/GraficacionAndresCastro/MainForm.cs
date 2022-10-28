@@ -1,7 +1,12 @@
 namespace GraficacionAndresCastro
 {
+    using DrawingTools = GraficacionAndresCastro.Classes.DrawingTools;
     public partial class MainForm : Form
     {
+        DrawingTools.Brush brush;
+
+        ////////////////////////////
+        /// Deprecated Code
         enum Tools { Pixel, Straight, Circumference, IrregularPolygon, RegularPolygon }
         enum BrushSizes { Small, Medium, Big }
         enum straigthStyles { Solid, Dotted, Dashed }
@@ -15,6 +20,10 @@ namespace GraficacionAndresCastro
         public MainForm()
         {
             InitializeComponent();
+
+            brush = new DrawingTools.Brush();
+            /////////////////////////////
+            /// Deprecated
             canvas = new Bitmap(ptbCanvas.Width, ptbCanvas.Height);
             this.ptbCanvas.Image = canvas;
             selectedBrushSize = BrushSizes.Small;
@@ -214,10 +223,10 @@ namespace GraficacionAndresCastro
             switch (this.selectedTool)
             {
                 case Tools.Pixel:
-                    drawPixelOnBitmap(ref this.canvas, e.Location, this.selectedColor);
+                    brush.drawPixelOnBitmap(ref this.canvas, e.Location);
                     this.ptbCanvas.Image = this.canvas;
                     break;
-                case Tools.Straight:
+                case Tools.Straight:  //* Deprecated Code starts *//
                     points.Add(e.Location);
                     if (points.Count == 2)
                     {
@@ -261,6 +270,7 @@ namespace GraficacionAndresCastro
                     break;
             }
             this.isLeftClickPressed = false;
+            //* Deprecated Code Ends *//
         }
         private void ptbCanvas_Resize(object sender, EventArgs e) { this.canvas = new Bitmap(this.canvas, this.ptbCanvas.Width, this.ptbCanvas.Height); }
         private void ptbCanvas_MouseMove(object sender, MouseEventArgs e)
