@@ -7,7 +7,7 @@ namespace GraficacionAndresCastro
 
         ////////////////////////////
         /// Deprecated Code
-        enum Tools { Pixel, Straight, Circumference, IrregularPolygon, RegularPolygon }
+        enum Tools { Pixel, Straight, Circumference, IrregularPolygon, RegularPolygon, Examen }
         enum BrushSizes { Small, Medium, Big }
         enum straigthStyles { Solid, Dotted, Dashed }
         Bitmap canvas;
@@ -239,6 +239,22 @@ namespace GraficacionAndresCastro
                     drawCircumference(ref this.canvas, e.Location, this.selectedColor);
                     this.ptbCanvas.Image = (Image)this.canvas;
                     break;
+                //////////* Examen
+                case Tools.Examen:
+                    if(this.points.Count == 1)
+                    { 
+                        drawCircumferenceExamen(ref this.canvas, this.points[0], e.Location,this.selectedColor);
+                        this.ptbCanvas.Image = (Image)this.canvas;
+                        this.points.Clear();
+                    }
+                    else
+                    {
+                        this.points.Add(e.Location);
+                        drawCircumference(ref this.canvas, e.Location, this.selectedColor);
+                        this.ptbCanvas.Image = (Image)this.canvas;
+                    }
+                    break;
+                // Examen  *//////////
                 case Tools.IrregularPolygon:
                     string boxSidesText = this.toolStripTxtBoxSides.Text;
 
@@ -362,5 +378,56 @@ namespace GraficacionAndresCastro
             this.canvas = new Bitmap(ptbCanvas.Width, ptbCanvas.Height);
             this.ptbCanvas.Image = (Image)this.canvas;
         }
+
+
+        //////////* Examen
+        ///
+        private void circunferenciaExamenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.selectedTool = Tools.Examen;
+        }
+
+        
+        private void drawCircumferenceExamen(ref Bitmap bitmap, Point center, Point exteriorPoint, Color color)
+        {
+            int x, y, e;
+            x = 30; y = 0; e = 0;
+
+
+            List<Point> pointsToDraw = new List<Point>();
+            pointsToDraw.Add( new Point(1, 2) );
+            pointsToDraw.Add(exteriorPoint);
+            Point pointToDraw = new Point();
+
+            pointToDraw.X = center.X - x;
+            pointToDraw.Y = center.Y + y;
+
+            // 0°
+            pointsToDraw[0] = pointToDraw;
+            drawStraightOnBitmap(ref bitmap, pointsToDraw, color);
+
+            pointToDraw.X = center.X + x;
+            pointToDraw.Y = center.Y - y;
+
+            // 180
+            pointsToDraw[0] = pointToDraw;
+            drawStraightOnBitmap(ref bitmap, pointsToDraw, color);
+
+            pointToDraw.X = center.X + y;
+            pointToDraw.Y = center.Y + x;
+
+            // 270
+            pointsToDraw[0] = pointToDraw;
+            drawStraightOnBitmap(ref bitmap, pointsToDraw, color);
+
+            // 90
+            pointToDraw.X = center.X + y;
+            pointToDraw.Y = center.Y - x;
+
+            pointsToDraw[0] = pointToDraw;
+            drawStraightOnBitmap(ref bitmap, pointsToDraw, color);
+        }
+
+        // Examen *////////// 
     }
 }

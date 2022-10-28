@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Escuela\\5to semestre\\Graficacion\\graficacionAndresCastro\\GraficacionAndresCastro\\GraficacionAndresCastro.csproj": {}
+    "D:\\Escuela\\5to semestre\\Graficacion\\GraficacionAndresCastro\\GraficacionAndresCastro\\GraficacionAndresCastro.csproj": {}
   },
   "projects": {
-    "D:\\Escuela\\5to semestre\\Graficacion\\graficacionAndresCastro\\GraficacionAndresCastro\\GraficacionAndresCastro.csproj": {
+    "D:\\Escuela\\5to semestre\\Graficacion\\GraficacionAndresCastro\\GraficacionAndresCastro\\GraficacionAndresCastro.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Escuela\\5to semestre\\Graficacion\\graficacionAndresCastro\\GraficacionAndresCastro\\GraficacionAndresCastro.csproj",
+        "projectUniqueName": "D:\\Escuela\\5to semestre\\Graficacion\\GraficacionAndresCastro\\GraficacionAndresCastro\\GraficacionAndresCastro.csproj",
         "projectName": "GraficacionAndresCastro",
-        "projectPath": "D:\\Escuela\\5to semestre\\Graficacion\\graficacionAndresCastro\\GraficacionAndresCastro\\GraficacionAndresCastro.csproj",
+        "projectPath": "D:\\Escuela\\5to semestre\\Graficacion\\GraficacionAndresCastro\\GraficacionAndresCastro\\GraficacionAndresCastro.csproj",
         "packagesPath": "C:\\Users\\Acerita\\.nuget\\packages\\",
         "outputPath": "D:\\Escuela\\5to semestre\\Graficacion\\graficacionAndresCastro\\GraficacionAndresCastro\\obj\\",
         "projectStyle": "PackageReference",
