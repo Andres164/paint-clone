@@ -62,7 +62,7 @@
             this.hexagonoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTxtBoxSidesRegularPoly = new System.Windows.Forms.ToolStripTextBox();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
-            this.circunferenciaExamenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.elipseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.ptbCanvas)).BeginInit();
             this.grpBoxTools.SuspendLayout();
             this.grpBoxStyles.SuspendLayout();
@@ -309,7 +309,7 @@
             this.circuloToolStripMenuItem,
             this.poligonoIrregularToolStripMenuItem,
             this.poligonoRegularToolStripMenuItem,
-            this.circunferenciaExamenToolStripMenuItem});
+            this.elipseToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(871, 24);
@@ -402,12 +402,12 @@
             this.toolStripTxtBoxSidesRegularPoly.Size = new System.Drawing.Size(100, 23);
             this.toolStripTxtBoxSidesRegularPoly.Text = "# de lados";
             // 
-            // circunferenciaExamenToolStripMenuItem
+            // elipseToolStripMenuItem
             // 
-            this.circunferenciaExamenToolStripMenuItem.Name = "circunferenciaExamenToolStripMenuItem";
-            this.circunferenciaExamenToolStripMenuItem.Size = new System.Drawing.Size(141, 20);
-            this.circunferenciaExamenToolStripMenuItem.Text = "Circunferencia examen";
-            this.circunferenciaExamenToolStripMenuItem.Click += new System.EventHandler(this.circunferenciaExamenToolStripMenuItem_Click);
+            this.elipseToolStripMenuItem.Name = "elipseToolStripMenuItem";
+            this.elipseToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+            this.elipseToolStripMenuItem.Text = "Elipse";
+            this.elipseToolStripMenuItem.Click += new System.EventHandler(this.elipseToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -469,6 +469,6 @@
         private ToolStripMenuItem hexagonoToolStripMenuItem;
         private ToolStripTextBox toolStripTxtBoxSidesRegularPoly;
         private Button btnCleanCanvas;
-        private ToolStripMenuItem circunferenciaExamenToolStripMenuItem;
+        private ToolStripMenuItem elipseToolStripMenuItem;
     }
 }

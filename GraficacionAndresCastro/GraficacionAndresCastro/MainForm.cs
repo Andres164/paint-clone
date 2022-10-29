@@ -7,7 +7,7 @@ namespace GraficacionAndresCastro
 
         ////////////////////////////
         /// Deprecated Code
-        enum Tools { Pixel, Straight, Circumference, IrregularPolygon, RegularPolygon, Examen }
+        enum Tools { Pixel, Straight, Circumference, IrregularPolygon, RegularPolygon, Ellipse }
         enum BrushSizes { Small, Medium, Big }
         enum straigthStyles { Solid, Dotted, Dashed }
         Bitmap canvas;
@@ -239,22 +239,10 @@ namespace GraficacionAndresCastro
                     drawCircumference(ref this.canvas, e.Location, this.selectedColor);
                     this.ptbCanvas.Image = (Image)this.canvas;
                     break;
-                //////////* Examen
-                case Tools.Examen:
-                    if(this.points.Count == 1)
-                    { 
-                        drawCircumferenceExamen(ref this.canvas, this.points[0], e.Location,this.selectedColor);
-                        this.ptbCanvas.Image = (Image)this.canvas;
-                        this.points.Clear();
-                    }
-                    else
-                    {
-                        this.points.Add(e.Location);
-                        drawCircumference(ref this.canvas, e.Location, this.selectedColor);
-                        this.ptbCanvas.Image = (Image)this.canvas;
-                    }
+                case Tools.Ellipse:
+                    drawEllipseOnBitmap(ref this.canvas, e.Location, this.selectedColor);
+                    this.ptbCanvas.Image = (Image)this.canvas;
                     break;
-                // Examen  *//////////
                 case Tools.IrregularPolygon:
                     string boxSidesText = this.toolStripTxtBoxSides.Text;
 
@@ -380,54 +368,53 @@ namespace GraficacionAndresCastro
         }
 
 
-        //////////* Examen
-        ///
-        private void circunferenciaExamenToolStripMenuItem_Click(object sender, EventArgs e)
+        public void drawEllipseOnBitmap(ref Bitmap bitmap, Point center, Color color)
         {
-            this.selectedTool = Tools.Examen;
+            {
+                int Rx = 50, Ry = 30;
+                int x, y, e;
+                x = 0;
+                y = Ry;
+                e = 2 * Ry * Ry + (1 - 2 * Ry) * (Rx * Rx);
+                while (Ry * Ry * x <= Rx * Rx * y)
+                {
+                    drawPixelOnBitmap(ref bitmap, new Point( center.X + x, center.Y + y ), color);
+                    drawPixelOnBitmap(ref bitmap, new Point( center.X + x, center.Y - y ), color);
+                    drawPixelOnBitmap(ref bitmap, new Point( center.X - x, center.Y + y ), color);
+                    drawPixelOnBitmap(ref bitmap, new Point( center.X - x, center.Y - y ), color);
+
+                    x += 1;
+                    if (e >= 0)
+                    {
+                        e = e + 4 * Rx * Rx * (1 - y);
+                        y = y - 1;
+                    }
+                    e = e + Ry * Ry * (4 * x + 6);
+                }
+                y = 0;
+                x = Rx;
+                e = 2 * Rx * Rx + (1 - 2 * Rx) * (Ry * Ry);
+
+                while (Rx * Rx * y <= Ry * Ry * x)
+                {
+                    drawPixelOnBitmap(ref bitmap, new Point(center.X + x, center.Y + y), color);
+                    drawPixelOnBitmap(ref bitmap, new Point(center.X + x, center.Y - y), color);
+                    drawPixelOnBitmap(ref bitmap, new Point(center.X - x, center.Y + y), color);
+                    drawPixelOnBitmap(ref bitmap, new Point(center.X - x, center.Y - y), color);
+                    y = y + 1;
+                    if (e >= 0)
+                    {
+                        e = e + 4 * Ry * Ry * (1 - x);
+                        x = x - 1;
+                    }
+                    e = e + Rx * Rx * (4 * y + 6);
+                }
+            }
         }
 
-        
-        private void drawCircumferenceExamen(ref Bitmap bitmap, Point center, Point exteriorPoint, Color color)
+        private void elipseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int x, y, e;
-            x = 30; y = 0; e = 0;
-
-
-            List<Point> pointsToDraw = new List<Point>();
-            pointsToDraw.Add( new Point(1, 2) );
-            pointsToDraw.Add(exteriorPoint);
-            Point pointToDraw = new Point();
-
-            pointToDraw.X = center.X - x;
-            pointToDraw.Y = center.Y + y;
-
-            // 0°
-            pointsToDraw[0] = pointToDraw;
-            drawStraightOnBitmap(ref bitmap, pointsToDraw, color);
-
-            pointToDraw.X = center.X + x;
-            pointToDraw.Y = center.Y - y;
-
-            // 180
-            pointsToDraw[0] = pointToDraw;
-            drawStraightOnBitmap(ref bitmap, pointsToDraw, color);
-
-            pointToDraw.X = center.X + y;
-            pointToDraw.Y = center.Y + x;
-
-            // 270
-            pointsToDraw[0] = pointToDraw;
-            drawStraightOnBitmap(ref bitmap, pointsToDraw, color);
-
-            // 90
-            pointToDraw.X = center.X + y;
-            pointToDraw.Y = center.Y - x;
-
-            pointsToDraw[0] = pointToDraw;
-            drawStraightOnBitmap(ref bitmap, pointsToDraw, color);
+            this.selectedTool = Tools.Ellipse;
         }
-
-        // Examen *////////// 
     }
 }
