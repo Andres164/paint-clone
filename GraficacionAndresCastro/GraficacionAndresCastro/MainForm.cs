@@ -155,6 +155,7 @@ namespace GraficacionAndresCastro
                 }
             }
         }
+        // Deprecated method
         private void drawCircumference(ref Bitmap bitmap, Point center, Color color)
         {
             int x, y, e;
@@ -194,6 +195,7 @@ namespace GraficacionAndresCastro
                 }
             }
         }
+        // Deprecated Methods drawPolygon
         private void drawIrregularPolygonOnBitmap(ref Bitmap bitmap, List<Point> points, Color color)
         {
             for(int i = 0; i < points.Count; i++)
@@ -217,6 +219,7 @@ namespace GraficacionAndresCastro
             }
             drawIrregularPolygonOnBitmap(ref bitmap, points, color);
         }
+        // Depreceted code finishes
 
         private void ptbCanvas_MouseClick(object sender, MouseEventArgs e)
         {
@@ -226,19 +229,22 @@ namespace GraficacionAndresCastro
                     brush.drawPixelOnBitmap(ref this.canvas, e.Location);
                     this.ptbCanvas.Image = this.canvas;
                     break;
-                case Tools.Straight:  //* Deprecated Code starts *//
+                case Tools.Straight: 
                     points.Add(e.Location);
                     if (points.Count == 2)
                     {
-                        drawStraightOnBitmap(ref this.canvas, points, this.selectedColor);
+                        DrawingTools.Straight straight = new DrawingTools.Straight();
+                        straight.drawOnBitmap(ref this.canvas, points, ref this.brush);
                         points.Clear();
                         this.ptbCanvas.Image = this.canvas;
                     }
                     break;
                 case Tools.Circumference:
-                    drawCircumference(ref this.canvas, e.Location, this.selectedColor);
+                    DrawingTools.Circle circle = new DrawingTools.Circle();
+                    circle.drawOnBitmap(ref this.canvas, new Point = new Point( e.Location ), this.selectedColor);
                     this.ptbCanvas.Image = (Image)this.canvas;
                     break;
+                //* Deprecated Code starts *//
                 case Tools.Ellipse:
                     drawEllipseOnBitmap(ref this.canvas, e.Location, this.selectedColor);
                     this.ptbCanvas.Image = (Image)this.canvas;
