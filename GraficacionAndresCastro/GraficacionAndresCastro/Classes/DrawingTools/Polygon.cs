@@ -9,18 +9,22 @@ namespace GraficacionAndresCastro.Classes.DrawingTools
     internal class Polygon : Tool
     {
         protected Straight straight;
-        public int sides
+        protected int sides;
+        public int Sides
         {
+            get { return this.sides; }
             set
             {
                 if (value > 2 && value < 250)
-                    sides = value;
+                    this.sides = value;
             }
-            get { return sides; }
         }
 
-        public Polygon() => straight = new Straight();
-
+        public Polygon(int sides)
+        {
+            straight = new Straight();
+            this.Sides = sides;
+        }
         public override void drawOnBitmap(ref Bitmap canvas, List<Point> points, ref Brush brush)
         {
             for (int i = 0; i < points.Count; i++)

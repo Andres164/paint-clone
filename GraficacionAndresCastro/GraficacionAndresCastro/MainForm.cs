@@ -3,18 +3,21 @@ namespace GraficacionAndresCastro
     using DrawingTools = GraficacionAndresCastro.Classes.DrawingTools;
     public partial class MainForm : Form
     {
-        DrawingTools.Brush brush;
 
         ////////////////////////////
         /// Deprecated Code
         enum Tools { Pixel, Straight, Circumference, IrregularPolygon, RegularPolygon, Ellipse }
         enum BrushSizes { Small, Medium, Big }
         enum straigthStyles { Solid, Dotted, Dashed }
-        Bitmap canvas;
         Tools selectedTool;
         BrushSizes selectedBrushSize;
         straigthStyles selectedStraigth;
         Color selectedColor;
+        //// *
+        
+
+        DrawingTools.Brush brush;
+        Bitmap canvas;
         List<Point> points;
         bool isLeftClickPressed;
         public MainForm()
@@ -22,13 +25,8 @@ namespace GraficacionAndresCastro
             InitializeComponent();
 
             brush = new DrawingTools.Brush();
-            /////////////////////////////
-            /// Deprecated
             canvas = new Bitmap(ptbCanvas.Width, ptbCanvas.Height);
             this.ptbCanvas.Image = canvas;
-            selectedBrushSize = BrushSizes.Small;
-            selectedStraigth = straigthStyles.Solid;
-            selectedColor = Color.Black;
             points = new List<Point>(20);
             isLeftClickPressed = false;
 
@@ -55,172 +53,6 @@ namespace GraficacionAndresCastro
             this.btnSelectedColor.BackColor = this.selectedColor;
         }
 
-        private void drawPixelOnBitmap(ref Bitmap bitmap, Point location, Color color)
-        {
-            for (int i = 0; i <= (int)selectedBrushSize; i++)
-                for (int j = 0; j <= (int)selectedBrushSize; j++)
-                {
-                    if(location.X+i >= 0  && location.X+i < canvas.Width && location.Y + j >= 0 && location.Y+j < canvas.Height)
-                        bitmap.SetPixel(location.X + i, location.Y + j, color);
-                }
-        }
-        private void drawStraightOnBitmap(ref Bitmap bitmap, List<Point> points, Color color)
-        {
-            drawPixelOnBitmap(ref bitmap, points[0], color);
-            int DX , DY, e, XIncrement, YIncrement;
-            DX = points[1].X - points[0].X;
-            DY = points[1].Y - points[0].Y;
-            Point currentPoint;
-            if (DX >=0)
-                XIncrement = 1;
-            else
-            {
-                DX = -DX;
-                XIncrement = -1;
-            }
-
-            if(DY >= 0)
-                YIncrement = 1;
-            else
-            {
-                DY = -DY;
-                YIncrement = -1;
-            }
-            currentPoint = points[0];
-            drawPixelOnBitmap(ref bitmap, currentPoint, color);
-            int iterations = 1, divisor = (int)selectedBrushSize * 4 + 2;
-            if(DX >= DY)
-            {
-                e = 2*DY - DX;
-                while(currentPoint.X != points[1].X)
-                {
-                    currentPoint.X += XIncrement;
-                    if (e < 0)
-                        e = e + 2 * DY;
-                    else
-                    {
-                        currentPoint.Y += YIncrement;
-                        e = e + 2 * (DY - DX);
-                    }
-                    switch(selectedStraigth)
-                    {
-                        case straigthStyles.Dotted:
-                            if (iterations % divisor == 0)
-                                drawPixelOnBitmap(ref bitmap, currentPoint, color);
-                            break;
-                        case straigthStyles.Dashed:
-                            if (selectedBrushSize == BrushSizes.Small && iterations % 5 != 0)
-                                drawPixelOnBitmap(ref bitmap, currentPoint, color);
-                            else if(selectedBrushSize != BrushSizes.Small && iterations % 10 == iterations % 20)
-                                drawPixelOnBitmap(ref bitmap, currentPoint, color);
-                            break;
-                        default:
-                            drawPixelOnBitmap(ref bitmap, currentPoint, color);
-                            break;
-
-                    }
-                    iterations++;
-                }
-            }
-            else
-            {
-                e = 2 * DX - DY;
-                while (currentPoint.Y != points[1].Y)
-                {
-                    currentPoint.Y += YIncrement;
-                    if (e < 0)
-                        e = e + 2 * DX;
-                    else
-                    {
-                        currentPoint.X += XIncrement;
-                        e = e + 2 * (DX - DY);
-                    }
-                    switch (selectedStraigth)
-                    {
-                        case straigthStyles.Dotted:
-                            if (iterations % divisor == 0)
-                                drawPixelOnBitmap(ref bitmap, currentPoint, color);
-                            break;
-                        case straigthStyles.Dashed:
-                            if (selectedBrushSize == BrushSizes.Small && iterations % 5 != 0)
-                                drawPixelOnBitmap(ref bitmap, currentPoint, color);
-                            else if (selectedBrushSize != BrushSizes.Small && iterations % 10 == iterations % 20)
-                                drawPixelOnBitmap(ref bitmap, currentPoint, color);
-                            break;
-                        default:
-                            drawPixelOnBitmap(ref bitmap, currentPoint, color);
-                            break;
-                    }
-                    iterations++;
-                }
-            }
-        }
-        // Deprecated method
-        private void drawCircumference(ref Bitmap bitmap, Point center, Color color)
-        {
-            int x, y, e;
-            x = 30; y = 0; e = 0;
-            while (y <= x)
-            {
-                Point pointToDraw = new Point(center.X + x, center.Y + y);
-                drawPixelOnBitmap(ref bitmap, pointToDraw, color);
-                pointToDraw.X = center.X - x;
-                pointToDraw.Y = center.Y + y;
-                drawPixelOnBitmap(ref bitmap, pointToDraw, color);
-                pointToDraw.X = center.X + x;
-                pointToDraw.Y = center.Y - y;
-                drawPixelOnBitmap(ref bitmap, pointToDraw, color);
-                pointToDraw.X = center.X - x;
-                pointToDraw.Y = center.Y - y;
-                drawPixelOnBitmap(ref bitmap, pointToDraw, color);
-                pointToDraw.X = center.X + y;
-                pointToDraw.Y = center.Y + x;
-                drawPixelOnBitmap(ref bitmap, pointToDraw, color);
-                pointToDraw.X = center.X - y;
-                pointToDraw.Y = center.Y + x;
-                drawPixelOnBitmap(ref bitmap, pointToDraw, color);
-                pointToDraw.X = center.X + y;
-                pointToDraw.Y = center.Y - x;
-                drawPixelOnBitmap(ref bitmap, pointToDraw, color);
-                pointToDraw.X = center.X - y;
-                pointToDraw.Y = center.Y - x;
-                drawPixelOnBitmap(ref bitmap, pointToDraw, color);
-
-                e = e + 2 * y + 1;
-                y = y + 1;
-                if ( ( 2 * e ) > ( 2 * x  -1 ) )
-                {   
-                    x = x - 1;
-                    e = e - 2 * x + 1;
-                }
-            }
-        }
-        // Deprecated Methods drawPolygon
-        private void drawIrregularPolygonOnBitmap(ref Bitmap bitmap, List<Point> points, Color color)
-        {
-            for(int i = 0; i < points.Count; i++)
-            {
-                List<Point> straightPoints = new List<Point>();
-                straightPoints.Add(points[i]);
-                int j = i < points.Count - 1 ? i+1 : 0;
-                straightPoints.Add(points[j]);
-                drawStraightOnBitmap(ref bitmap, straightPoints, color);
-            }
-        }
-        private void drawRegularPolygonOnBitmap(ref Bitmap bitmap, Point polygonCenter, Int16 polygonSides, Color color)
-        {
-            List<Point> points = new List<Point>();
-            double X, Y, radius = 30, verticesAngle = 360.0 / polygonSides;
-            for(double i = 0; i < 360; i += verticesAngle)
-            {
-                X = polygonCenter.X + radius * Math.Cos( (i + 90 * (polygonSides -2) / polygonSides ) * Math.PI / 180 );
-                Y = polygonCenter.Y + radius * Math.Sin( (i + 90 * (polygonSides -2) / polygonSides ) * Math.PI / 180 );
-                points.Add( new Point( Convert.ToInt32(X), Convert.ToInt32(Y) ) );
-            }
-            drawIrregularPolygonOnBitmap(ref bitmap, points, color);
-        }
-        // Depreceted code finishes
-
         private void ptbCanvas_MouseClick(object sender, MouseEventArgs e)
         {
             switch (this.selectedTool)
@@ -240,14 +72,11 @@ namespace GraficacionAndresCastro
                     }
                     break;
                 case Tools.Circumference:
-                    DrawingTools.Circle circle = new DrawingTools.Circle();
-                    circle.drawOnBitmap(ref this.canvas, new Point = new Point( e.Location ), this.selectedColor);
+                    DrawingTools.Circle circle = new DrawingTools.Circle(30);
+                    points.Add(e.Location);
+                    circle.drawOnBitmap(ref this.canvas, points, ref this.brush);
                     this.ptbCanvas.Image = (Image)this.canvas;
-                    break;
-                //* Deprecated Code starts *//
-                case Tools.Ellipse:
-                    drawEllipseOnBitmap(ref this.canvas, e.Location, this.selectedColor);
-                    this.ptbCanvas.Image = (Image)this.canvas;
+                    points.Clear();
                     break;
                 case Tools.IrregularPolygon:
                     string boxSidesText = this.toolStripTxtBoxSides.Text;
@@ -262,9 +91,10 @@ namespace GraficacionAndresCastro
                     }
                     else if (this.points.Count == Convert.ToInt32(boxSidesText))
                     {
-                        drawIrregularPolygonOnBitmap(ref this.canvas, this.points, this.selectedColor);
-                        this.points.Clear();
+                        DrawingTools.Polygon irregularPolygon = new DrawingTools.Polygon(Convert.ToInt32(boxSidesText));
+                        irregularPolygon.drawOnBitmap(ref this.canvas, this.points, ref this.brush);
                         this.ptbCanvas.Image = this.canvas;
+                        this.points.Clear();
                     }
                     break;
                 case Tools.RegularPolygon:
@@ -274,52 +104,28 @@ namespace GraficacionAndresCastro
                         MessageBox.Show("El campo # de Lados solo acepta numeros enteros mayores a 2", "Valor Invalido", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     else
                     {
-                        drawRegularPolygonOnBitmap(ref this.canvas, e.Location, Convert.ToInt16(regularPolyBoxSidesText), this.selectedColor);
+                        DrawingTools.RegularPolygon regularPolygon = new DrawingTools.RegularPolygon(Convert.ToInt32(regularPolyBoxSidesText), 30);
+                        regularPolygon.drawRegularPolygon(ref this.canvas, e.Location, ref this.brush);
                         this.ptbCanvas.Image = (Image)this.canvas.Clone();
                     }
                     break;
+                case Tools.Ellipse:
+                    DrawingTools.Ellipse ellipse = new DrawingTools.Ellipse(30, 50);
+                    points.Add(e.Location);
+                    ellipse.drawOnBitmap(ref this.canvas, points, ref this.brush);
+                    this.ptbCanvas.Image = (Image)this.canvas;
+                    this.points.Clear();
+                    break;
             }
             this.isLeftClickPressed = false;
-            //* Deprecated Code Ends *//
         }
         private void ptbCanvas_Resize(object sender, EventArgs e) { this.canvas = new Bitmap(this.canvas, this.ptbCanvas.Width, this.ptbCanvas.Height); }
         private void ptbCanvas_MouseMove(object sender, MouseEventArgs e)
         {
             if(this.selectedTool == Tools.Pixel && isLeftClickPressed)
             {
-                drawPixelOnBitmap(ref this.canvas, e.Location, this.selectedColor);
+                brush.drawPixelOnBitmap(ref this.canvas, e.Location);
                 this.ptbCanvas.Image = this.canvas;
-            }
-            else if (this.selectedTool == Tools.Straight && this.points.Count > 0)
-            {
-                this.ptbCanvas.Image = this.canvas;
-
-                Bitmap tempCanvas = (Bitmap)this.canvas.Clone();
-                List<Point> previewPoints = new List<Point>();
-                previewPoints.Add(this.points[0]);
-                previewPoints.Add(e.Location);
-                drawStraightOnBitmap(ref tempCanvas, previewPoints, Color.LightGray);
-                this.ptbCanvas.Image = tempCanvas;
-            }
-            else if(this.selectedTool == Tools.IrregularPolygon && this.points.Count > 0)
-            {
-                this.ptbCanvas.Image = this.canvas;
-
-                Bitmap tempCanvas = (Bitmap)this.canvas.Clone();
-                List<Point> previewPoints = new List<Point>();
-                int sidesOfPolygon = Convert.ToInt32((this.toolStripTxtBoxSides.Text));
-
-                previewPoints.Add(this.points[this.points.Count-1]);
-                previewPoints.Add(e.Location);
-                drawStraightOnBitmap(ref tempCanvas, previewPoints, Color.LightGray);
-                if(this.points.Count == sidesOfPolygon-1)
-                {
-                    previewPoints[0] = this.points[0];
-                    drawStraightOnBitmap(ref tempCanvas, previewPoints, Color.LightGray);
-
-                }
-
-                this.ptbCanvas.Image = tempCanvas;
             }
         }
         private void ptbCanvas_MouseDown(object sender, MouseEventArgs e) { this.isLeftClickPressed = true; }
@@ -366,58 +172,11 @@ namespace GraficacionAndresCastro
                 this.ptbCanvas.Image = this.canvas;
             }
         }
-
         private void btnCleanCanvas_Click(object sender, EventArgs e)
         {
             this.canvas = new Bitmap(ptbCanvas.Width, ptbCanvas.Height);
             this.ptbCanvas.Image = (Image)this.canvas;
         }
-
-
-        public void drawEllipseOnBitmap(ref Bitmap bitmap, Point center, Color color)
-        {
-            {
-                int Rx = 50, Ry = 30;
-                int x, y, e;
-                x = 0;
-                y = Ry;
-                e = 2 * Ry * Ry + (1 - 2 * Ry) * (Rx * Rx);
-                while (Ry * Ry * x <= Rx * Rx * y)
-                {
-                    drawPixelOnBitmap(ref bitmap, new Point( center.X + x, center.Y + y ), color);
-                    drawPixelOnBitmap(ref bitmap, new Point( center.X + x, center.Y - y ), color);
-                    drawPixelOnBitmap(ref bitmap, new Point( center.X - x, center.Y + y ), color);
-                    drawPixelOnBitmap(ref bitmap, new Point( center.X - x, center.Y - y ), color);
-
-                    x += 1;
-                    if (e >= 0)
-                    {
-                        e = e + 4 * Rx * Rx * (1 - y);
-                        y = y - 1;
-                    }
-                    e = e + Ry * Ry * (4 * x + 6);
-                }
-                y = 0;
-                x = Rx;
-                e = 2 * Rx * Rx + (1 - 2 * Rx) * (Ry * Ry);
-
-                while (Rx * Rx * y <= Ry * Ry * x)
-                {
-                    drawPixelOnBitmap(ref bitmap, new Point(center.X + x, center.Y + y), color);
-                    drawPixelOnBitmap(ref bitmap, new Point(center.X + x, center.Y - y), color);
-                    drawPixelOnBitmap(ref bitmap, new Point(center.X - x, center.Y + y), color);
-                    drawPixelOnBitmap(ref bitmap, new Point(center.X - x, center.Y - y), color);
-                    y = y + 1;
-                    if (e >= 0)
-                    {
-                        e = e + 4 * Ry * Ry * (1 - x);
-                        x = x - 1;
-                    }
-                    e = e + Rx * Rx * (4 * y + 6);
-                }
-            }
-        }
-
         private void elipseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.selectedTool = Tools.Ellipse;
