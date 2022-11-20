@@ -9,9 +9,14 @@ namespace GraficacionAndresCastro.Classes.DrawingTools
     internal abstract class Tool
     {
         public enum styles { Solid, Dotted, Dashed }
-        public styles selectedStyle { get; set; }
+        protected styles selectedStyle;
+        public virtual styles SelectedStyle 
+        {
+            get => selectedStyle;
+            set => selectedStyle = value;
+        }
         
-        public Tool() => this.selectedStyle = styles.Solid;
+        public Tool() => this.SelectedStyle = styles.Solid;
         public abstract void drawOnBitmap(ref Bitmap canvas, List<Point> points, ref Brush brush);
     }
 }
