@@ -92,7 +92,9 @@ namespace GraficacionAndresCastro
                         MessageBox.Show("El campo # de Lados solo acepta numeros enteros mayores a 2", "Valor Invalido", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     else
                     {
+                        DrawingTools.Tool.styles selectedStyle = this.selectedDrawTool.SelectedStyle;
                         DrawingTools.RegularPolygon regularPolygon = new DrawingTools.RegularPolygon(Convert.ToInt32(regularPolyBoxSidesText), 30);
+                        regularPolygon.SelectedStyle = selectedStyle;
                         regularPolygon.drawRegularPolygon(ref this.canvas, e.Location, ref this.brush);
                         this.ptbCanvas.Image = (Image)this.canvas.Clone();
                     }
@@ -108,7 +110,9 @@ namespace GraficacionAndresCastro
                     }
                     else if (this.points.Count == Convert.ToInt32(boxSidesText))
                     {
+                        DrawingTools.Tool.styles selectedStyle = this.selectedDrawTool.SelectedStyle;
                         this.selectedDrawTool = new DrawingTools.Polygon(Convert.ToInt32(boxSidesText));
+                        selectedDrawTool.SelectedStyle = selectedStyle;
                         this.selectedDrawTool.drawOnBitmap(ref this.canvas, this.points, ref this.brush);
                         this.ptbCanvas.Image = this.canvas;
                         this.points.Clear();

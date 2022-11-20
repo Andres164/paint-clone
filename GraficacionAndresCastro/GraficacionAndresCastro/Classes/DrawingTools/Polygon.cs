@@ -22,7 +22,8 @@ namespace GraficacionAndresCastro.Classes.DrawingTools
 
         public Polygon(int sides)
         {
-            straight = new Straight();
+            this.straight = new Straight();
+            this.straight.SelectedStyle = styles.Dashed;
             this.Sides = sides;
         }
         public override void drawOnBitmap(ref Bitmap canvas, List<Point> points, ref Brush brush)
