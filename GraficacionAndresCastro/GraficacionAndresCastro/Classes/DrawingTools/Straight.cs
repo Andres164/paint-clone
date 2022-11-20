@@ -46,7 +46,7 @@ namespace GraficacionAndresCastro.Classes.DrawingTools
                         currentPoint.Y += YIncrement;
                         e = e + 2 * (DY - DX);
                     }
-                    switch (selectedStyle)
+                    switch (SelectedStyle)
                     {
                         case styles.Dotted:
                             if (iterations % divisor == 0)
@@ -79,7 +79,7 @@ namespace GraficacionAndresCastro.Classes.DrawingTools
                         currentPoint.X += XIncrement;
                         e = e + 2 * (DX - DY);
                     }
-                    switch (selectedStyle)
+                    switch (SelectedStyle)
                     {
                         case styles.Dotted:
                             if (iterations % divisor == 0)

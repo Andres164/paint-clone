@@ -27,6 +27,7 @@ namespace GraficacionAndresCastro.Classes.DrawingTools
         }
         public override void drawOnBitmap(ref Bitmap canvas, List<Point> points, ref Brush brush)
         {
+            this.straight.SelectedStyle = this.SelectedStyle;
             for (int i = 0; i < points.Count; i++)
             {
                 List<Point> straightPoints = new List<Point>();
@@ -36,7 +37,5 @@ namespace GraficacionAndresCastro.Classes.DrawingTools
                 this.straight.drawOnBitmap(ref canvas, straightPoints, ref brush);
             }
         }
-
-        
     }
 }

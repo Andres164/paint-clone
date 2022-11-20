@@ -321,7 +321,6 @@
             this.pixelToolStripMenuItem.Name = "pixelToolStripMenuItem";
             this.pixelToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.pixelToolStripMenuItem.Text = "Pixel";
-            this.pixelToolStripMenuItem.Click += new System.EventHandler(this.pixelToolStripMenuItem_Click);
             // 
             // rectaToolStripMenuItem
             // 
