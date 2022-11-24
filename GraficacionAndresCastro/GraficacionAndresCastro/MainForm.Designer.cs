@@ -61,8 +61,9 @@
             this.pentagonoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hexagonoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTxtBoxSidesRegularPoly = new System.Windows.Forms.ToolStripTextBox();
-            this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.elipseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.transladarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.ptbCanvas)).BeginInit();
             this.grpBoxTools.SuspendLayout();
             this.grpBoxStyles.SuspendLayout();
@@ -309,7 +310,8 @@
             this.circuloToolStripMenuItem,
             this.poligonoIrregularToolStripMenuItem,
             this.poligonoRegularToolStripMenuItem,
-            this.elipseToolStripMenuItem});
+            this.elipseToolStripMenuItem,
+            this.transladarToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(871, 24);
@@ -408,6 +410,13 @@
             this.elipseToolStripMenuItem.Text = "Elipse";
             this.elipseToolStripMenuItem.Click += new System.EventHandler(this.elipseToolStripMenuItem_Click);
             // 
+            // transladarToolStripMenuItem
+            // 
+            this.transladarToolStripMenuItem.Name = "transladarToolStripMenuItem";
+            this.transladarToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
+            this.transladarToolStripMenuItem.Text = "Transladar";
+            this.transladarToolStripMenuItem.Click += new System.EventHandler(this.transladarToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -469,5 +478,6 @@
         private ToolStripTextBox toolStripTxtBoxSidesRegularPoly;
         private Button btnCleanCanvas;
         private ToolStripMenuItem elipseToolStripMenuItem;
+        private ToolStripMenuItem transladarToolStripMenuItem;
     }
 }
