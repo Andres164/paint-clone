@@ -62,8 +62,8 @@
             this.hexagonoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTxtBoxSidesRegularPoly = new System.Windows.Forms.ToolStripTextBox();
             this.elipseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.transladarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.colorDialog = new System.Windows.Forms.ColorDialog();
             ((System.ComponentModel.ISupportInitialize)(this.ptbCanvas)).BeginInit();
             this.grpBoxTools.SuspendLayout();
             this.grpBoxStyles.SuspendLayout();

@@ -3,32 +3,32 @@ namespace GraficacionAndresCastro
     using DrawingTools = GraficacionAndresCastro.Classes.DrawingTools;
     public partial class MainForm : Form
     {
-
-        ////////////////////////////
-        /// Deprecated Code
-        enum Tools { Pixel, Straight, Circumference, IrregularPolygon, RegularPolygon, Ellipse }
-        enum BrushSizes { Small, Medium, Big }
-        enum straigthStyles { Solid, Dotted, Dashed }
-        Tools selectedTool;
-        BrushSizes selectedBrushSize;
-        straigthStyles selectedStraigth;
-        Color selectedColor;
-        //// *
-        
-        enum ModificationTools { Translation }
+        enum ModificationTools { None, Translation }
         ModificationTools currentModificationTool;
 
         DrawingTools.Tool selectedDrawTool;
+        DrawingTools.Tool SelectedDrawTool
+        {
+            get => selectedDrawTool;
+            set 
+            { 
+                value.SelectedStyle = this.selectedDrawTool.SelectedStyle;
+                this.selectedDrawTool = value;
+                this.grpBoxStyles.Enabled = true;
+                this.currentModificationTool = ModificationTools.None;
+            }
+        }
         DrawingTools.Brush brush;
         Bitmap previousCanvas;
         Bitmap currentCanvas;
         List<Point> points;
+        List<Point> previousFigurePoints;
         bool isLeftClickPressed;
         public MainForm()
         {
             InitializeComponent();
 
-            this.currentModificationTool = ModificationTools.Translation;
+            this.currentModificationTool = ModificationTools.None;
 
             this.selectedDrawTool = new DrawingTools.Straight();
             this.brush = new DrawingTools.Brush();
@@ -36,6 +36,8 @@ namespace GraficacionAndresCastro
             this.currentCanvas = new Bitmap(ptbCanvas.Width, ptbCanvas.Height);
             this.ptbCanvas.Image = currentCanvas;
             this.points = new List<Point>(20);
+            this.previousFigurePoints = new List<Point>(20);
+            this.previousFigurePoints.Add( new Point(1, 1) );
             this.isLeftClickPressed = false;
 
             this.btnSelectedColor.BackColor = this.brush.selectedColor;
@@ -63,10 +65,27 @@ namespace GraficacionAndresCastro
         private void ptbCanvas_MouseClick(object sender, MouseEventArgs e)
         {
             // if(!translacionSelected)
-            bool isDrawingFinished = this.points.Count == 0 ? true : false;
+            bool isDrawingFinished = this.points.Count == 0 && this.currentModificationTool != ModificationTools.Translation ? true : false;
             if (isDrawingFinished)
                 this.previousCanvas = (Bitmap)currentCanvas.Clone();
 
+            switch (this.currentModificationTool)
+            {
+                case ModificationTools.Translation:
+                    this.currentCanvas = (Bitmap)this.previousCanvas.Clone();
+
+                    int diffPreviousToNewPoint_X = e.Location.X - this.previousFigurePoints[0].X;
+                    int diffPreviousToNewPoint_Y = e.Location.Y - this.previousFigurePoints[0].Y;
+                    for(int i = 0; i < this.previousFigurePoints.Count; i++)
+                    {
+                        Point point = this.previousFigurePoints[i];
+                        point.X += diffPreviousToNewPoint_X;
+                        point.Y += diffPreviousToNewPoint_Y;
+                        MessageBox.Show("i: " + i);
+                        this.points.Add(point);
+                    }
+                    break;
+            }
             switch (this.selectedDrawTool)
             {
                 /*
@@ -80,6 +99,7 @@ namespace GraficacionAndresCastro
                     if (points.Count == 2)
                     { 
                         this.selectedDrawTool.drawOnBitmap(ref this.currentCanvas, points, ref this.brush);
+                        this.previousFigurePoints = new List<Point>(this.points);
                         points.Clear();
                         this.ptbCanvas.Image = this.currentCanvas;
                     }
@@ -113,7 +133,6 @@ namespace GraficacionAndresCastro
                 case DrawingTools.Polygon:
                     string boxSidesText = this.toolStripTxtBoxSides.Text;
                     this.points.Add(e.Location);
-                    this.currentCanvas = (Bitmap)this.ptbCanvas.Image;
                     if (!isValidNumberOfPolygonSides(boxSidesText))
                     {
                         MessageBox.Show("El campo # de Lados solo acepta numeros enteros mayores a 2", "Valor Invalido", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -126,20 +145,10 @@ namespace GraficacionAndresCastro
                         selectedDrawTool.SelectedStyle = selectedStyle;
                         this.selectedDrawTool.drawOnBitmap(ref this.currentCanvas, this.points, ref this.brush);
                         this.ptbCanvas.Image = this.currentCanvas;
+                        this.previousFigurePoints = this.points;
                         this.points.Clear();
                     }
                     break;
-                    /*
-                    switch (this.currentModificationTool)
-                    {
-                        case ModificationTools.Translation:
-                            this.points.Add(e.Location);
-                            this.currentCanvas = (Bitmap)this.previousCanvas.Clone();
-                            selectedDrawTool.drawOnBitmap(ref this.currentCanvas, this.points, ref this.brush);
-                            this.points.Clear();
-                            break;
-                    }
-                    */
             }
             this.isLeftClickPressed = false;
         }
@@ -183,35 +192,15 @@ namespace GraficacionAndresCastro
             }
         }
 
-        private void rectaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.selectedDrawTool = new DrawingTools.Straight();
-            this.grpBoxStyles.Enabled = true;
-        }
-        private void circuloToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.selectedDrawTool = new DrawingTools.Circle(30);
-            this.grpBoxStyles.Enabled = true;
-        }
-        private void poligonoIrregularToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.selectedDrawTool = new DrawingTools.Polygon(3);
-            this.grpBoxStyles.Enabled = true;
-        }
-        private void poligonoRegularToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.selectedDrawTool = new DrawingTools.RegularPolygon(3, 30);
-            this.grpBoxStyles.Enabled = true;
-        }
-        private void elipseToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.selectedDrawTool = new DrawingTools.Ellipse(30, 50);
-            this.grpBoxStyles.Enabled = true;
-        }
+        private void rectaToolStripMenuItem_Click(object sender, EventArgs e) { this.SelectedDrawTool = new DrawingTools.Straight(); }
+        private void circuloToolStripMenuItem_Click(object sender, EventArgs e) { this.SelectedDrawTool = new DrawingTools.Circle(30); }
+        private void poligonoIrregularToolStripMenuItem_Click(object sender, EventArgs e) { this.SelectedDrawTool = new DrawingTools.Polygon(3); }
+        private void poligonoRegularToolStripMenuItem_Click(object sender, EventArgs e) { this.SelectedDrawTool = new DrawingTools.RegularPolygon(3, 30); }
+        private void elipseToolStripMenuItem_Click(object sender, EventArgs e) { this.SelectedDrawTool = new DrawingTools.Ellipse(30, 50); }
         private void transladarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.selectedDrawTool = null;
             this.currentModificationTool = ModificationTools.Translation;
+            this.grpBoxStyles.Enabled = true;
         }
 
         private void trianguloToolStripMenuItem_Click(object sender, EventArgs e) { this.toolStripTxtBoxSidesRegularPoly.Text = "3"; }
