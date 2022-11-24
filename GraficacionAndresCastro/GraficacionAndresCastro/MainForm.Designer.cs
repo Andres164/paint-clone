@@ -64,6 +64,8 @@
             this.elipseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transladarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.rotacionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnCubeta = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ptbCanvas)).BeginInit();
             this.grpBoxTools.SuspendLayout();
             this.grpBoxStyles.SuspendLayout();
@@ -91,6 +93,7 @@
             // grpBoxTools
             // 
             this.grpBoxTools.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.grpBoxTools.Controls.Add(this.btnCubeta);
             this.grpBoxTools.Controls.Add(this.btnCleanCanvas);
             this.grpBoxTools.Controls.Add(this.grpBoxStyles);
             this.grpBoxTools.Controls.Add(this.grpBoxSize);
@@ -311,7 +314,8 @@
             this.poligonoIrregularToolStripMenuItem,
             this.poligonoRegularToolStripMenuItem,
             this.elipseToolStripMenuItem,
-            this.transladarToolStripMenuItem});
+            this.transladarToolStripMenuItem,
+            this.rotacionToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(871, 24);
@@ -417,6 +421,21 @@
             this.transladarToolStripMenuItem.Text = "Transladar";
             this.transladarToolStripMenuItem.Click += new System.EventHandler(this.transladarToolStripMenuItem_Click);
             // 
+            // rotacionToolStripMenuItem
+            // 
+            this.rotacionToolStripMenuItem.Name = "rotacionToolStripMenuItem";
+            this.rotacionToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
+            this.rotacionToolStripMenuItem.Text = "Rotacion";
+            // 
+            // btnCubeta
+            // 
+            this.btnCubeta.Location = new System.Drawing.Point(368, 21);
+            this.btnCubeta.Name = "btnCubeta";
+            this.btnCubeta.Size = new System.Drawing.Size(37, 35);
+            this.btnCubeta.TabIndex = 5;
+            this.btnCubeta.UseVisualStyleBackColor = true;
+            this.btnCubeta.Click += new System.EventHandler(this.btnCubeta_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -479,5 +498,7 @@
         private Button btnCleanCanvas;
         private ToolStripMenuItem elipseToolStripMenuItem;
         private ToolStripMenuItem transladarToolStripMenuItem;
+        private Button btnCubeta;
+        private ToolStripMenuItem rotacionToolStripMenuItem;
     }
 }
