@@ -16,6 +16,7 @@ namespace GraficacionAndresCastro
                 this.selectedDrawTool = value;
                 this.grpBoxStyles.Enabled = true;
                 this.currentModificationTool = ModificationTools.None;
+                this.points.Clear();
             }
         }
         DrawingTools.Brush brush;
@@ -52,10 +53,7 @@ namespace GraficacionAndresCastro
             }
             return true;
         }
-        private bool isValidNumberOfPolygonSides(string text)
-        {
-            return isStringOnlyNumbers(text) && Convert.ToInt32(text) > 2;
-        }
+        private bool isValidNumberOfPolygonSides(string text) { return isStringOnlyNumbers(text) && Convert.ToInt32(text) > 2; }
         private void changeSelectedColor(object sender)
         {
             Button senderBtn = (Button)sender;
@@ -64,7 +62,6 @@ namespace GraficacionAndresCastro
         }
         private void ptbCanvas_MouseClick(object sender, MouseEventArgs e)
         {
-            // if(!translacionSelected)
             bool isDrawingFinished = this.points.Count == 0 && this.currentModificationTool != ModificationTools.Translation ? true : false;
             if (isDrawingFinished)
                 this.previousCanvas = (Bitmap)currentCanvas.Clone();
@@ -81,7 +78,6 @@ namespace GraficacionAndresCastro
                         Point point = this.previousFigurePoints[i];
                         point.X += diffPreviousToNewPoint_X;
                         point.Y += diffPreviousToNewPoint_Y;
-                        MessageBox.Show("i: " + i);
                         this.points.Add(point);
                     }
                     break;
@@ -95,7 +91,8 @@ namespace GraficacionAndresCastro
                     break;
                 */
                 case DrawingTools.Straight:
-                    points.Add(e.Location);
+                    if (points.Count != 2)
+                        points.Add(e.Location);
                     if (points.Count == 2)
                     { 
                         this.selectedDrawTool.drawOnBitmap(ref this.currentCanvas, points, ref this.brush);
@@ -132,21 +129,25 @@ namespace GraficacionAndresCastro
                     break;
                 case DrawingTools.Polygon:
                     string boxSidesText = this.toolStripTxtBoxSides.Text;
-                    this.points.Add(e.Location);
                     if (!isValidNumberOfPolygonSides(boxSidesText))
                     {
                         MessageBox.Show("El campo # de Lados solo acepta numeros enteros mayores a 2", "Valor Invalido", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         this.points.Clear();
                     }
-                    else if (this.points.Count == Convert.ToInt32(boxSidesText))
+                    else
                     {
-                        DrawingTools.Tool.styles selectedStyle = this.selectedDrawTool.SelectedStyle;
-                        this.selectedDrawTool = new DrawingTools.Polygon(Convert.ToInt32(boxSidesText));
-                        selectedDrawTool.SelectedStyle = selectedStyle;
-                        this.selectedDrawTool.drawOnBitmap(ref this.currentCanvas, this.points, ref this.brush);
-                        this.ptbCanvas.Image = this.currentCanvas;
-                        this.previousFigurePoints = this.points;
-                        this.points.Clear();
+                        if (this.points.Count != Convert.ToInt32(boxSidesText))
+                            this.points.Add(e.Location);
+                        if (this.points.Count == Convert.ToInt32(boxSidesText))
+                        {
+                            DrawingTools.Tool.styles selectedStyle = this.selectedDrawTool.SelectedStyle;
+                            this.selectedDrawTool = new DrawingTools.Polygon(Convert.ToInt32(boxSidesText));
+                            selectedDrawTool.SelectedStyle = selectedStyle;
+                            this.selectedDrawTool.drawOnBitmap(ref this.currentCanvas, this.points, ref this.brush);
+                            this.ptbCanvas.Image = this.currentCanvas;
+                            this.previousFigurePoints = new List<Point>(this.points);
+                            this.points.Clear();
+                        }
                     }
                     break;
             }
@@ -222,6 +223,11 @@ namespace GraficacionAndresCastro
             this.currentCanvas = new Bitmap(ptbCanvas.Width, ptbCanvas.Height);
             this.previousCanvas = (Bitmap)currentCanvas.Clone();
             this.ptbCanvas.Image = (Image)this.currentCanvas;
+        }
+
+        private void btnCubeta_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
