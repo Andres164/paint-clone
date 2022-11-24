@@ -15,19 +15,26 @@ namespace GraficacionAndresCastro
         Color selectedColor;
         //// *
         
+        enum ModificationTools { Translation }
+        ModificationTools currentModificationTool;
+
         DrawingTools.Tool selectedDrawTool;
         DrawingTools.Brush brush;
-        Bitmap canvas;
+        Bitmap previousCanvas;
+        Bitmap currentCanvas;
         List<Point> points;
         bool isLeftClickPressed;
         public MainForm()
         {
             InitializeComponent();
 
+            this.currentModificationTool = ModificationTools.Translation;
+
             this.selectedDrawTool = new DrawingTools.Straight();
             this.brush = new DrawingTools.Brush();
-            this.canvas = new Bitmap(ptbCanvas.Width, ptbCanvas.Height);
-            this.ptbCanvas.Image = canvas;
+            this.previousCanvas = new Bitmap(ptbCanvas.Width, ptbCanvas.Height);
+            this.currentCanvas = new Bitmap(ptbCanvas.Width, ptbCanvas.Height);
+            this.ptbCanvas.Image = currentCanvas;
             this.points = new List<Point>(20);
             this.isLeftClickPressed = false;
 
@@ -53,9 +60,13 @@ namespace GraficacionAndresCastro
             this.brush.selectedColor = senderBtn.BackColor;
             this.btnSelectedColor.BackColor = this.brush.selectedColor;
         }
-
         private void ptbCanvas_MouseClick(object sender, MouseEventArgs e)
         {
+            // if(!translacionSelected)
+            bool isDrawingFinished = this.points.Count == 0 ? true : false;
+            if (isDrawingFinished)
+                this.previousCanvas = (Bitmap)currentCanvas.Clone();
+
             switch (this.selectedDrawTool)
             {
                 /*
@@ -67,22 +78,22 @@ namespace GraficacionAndresCastro
                 case DrawingTools.Straight:
                     points.Add(e.Location);
                     if (points.Count == 2)
-                    {
-                        this.selectedDrawTool.drawOnBitmap(ref this.canvas, points, ref this.brush);
+                    { 
+                        this.selectedDrawTool.drawOnBitmap(ref this.currentCanvas, points, ref this.brush);
                         points.Clear();
-                        this.ptbCanvas.Image = this.canvas;
+                        this.ptbCanvas.Image = this.currentCanvas;
                     }
                     break;
                 case DrawingTools.Ellipse:
                     points.Add(e.Location);
-                    this.selectedDrawTool.drawOnBitmap(ref this.canvas, points, ref this.brush);
-                    this.ptbCanvas.Image = (Image)this.canvas;
+                    this.selectedDrawTool.drawOnBitmap(ref this.currentCanvas, points, ref this.brush);
+                    this.ptbCanvas.Image = (Image)this.currentCanvas;
                     this.points.Clear();
                     break;
                 case DrawingTools.Circle:
                     points.Add(e.Location);
-                    this.selectedDrawTool.drawOnBitmap(ref this.canvas, points, ref this.brush);
-                    this.ptbCanvas.Image = (Image)this.canvas;
+                    this.selectedDrawTool.drawOnBitmap(ref this.currentCanvas, points, ref this.brush);
+                    this.ptbCanvas.Image = (Image)this.currentCanvas;
                     points.Clear();
                     break;
                 case DrawingTools.RegularPolygon:
@@ -95,14 +106,14 @@ namespace GraficacionAndresCastro
                         DrawingTools.Tool.styles selectedStyle = this.selectedDrawTool.SelectedStyle;
                         DrawingTools.RegularPolygon regularPolygon = new DrawingTools.RegularPolygon(Convert.ToInt32(regularPolyBoxSidesText), 30);
                         regularPolygon.SelectedStyle = selectedStyle;
-                        regularPolygon.drawRegularPolygon(ref this.canvas, e.Location, ref this.brush);
-                        this.ptbCanvas.Image = (Image)this.canvas.Clone();
+                        regularPolygon.drawRegularPolygon(ref this.currentCanvas, e.Location, ref this.brush);
+                        this.ptbCanvas.Image = (Image)this.currentCanvas.Clone();
                     }
                     break;
                 case DrawingTools.Polygon:
                     string boxSidesText = this.toolStripTxtBoxSides.Text;
                     this.points.Add(e.Location);
-                    this.canvas = (Bitmap)this.ptbCanvas.Image;
+                    this.currentCanvas = (Bitmap)this.ptbCanvas.Image;
                     if (!isValidNumberOfPolygonSides(boxSidesText))
                     {
                         MessageBox.Show("El campo # de Lados solo acepta numeros enteros mayores a 2", "Valor Invalido", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -113,15 +124,30 @@ namespace GraficacionAndresCastro
                         DrawingTools.Tool.styles selectedStyle = this.selectedDrawTool.SelectedStyle;
                         this.selectedDrawTool = new DrawingTools.Polygon(Convert.ToInt32(boxSidesText));
                         selectedDrawTool.SelectedStyle = selectedStyle;
-                        this.selectedDrawTool.drawOnBitmap(ref this.canvas, this.points, ref this.brush);
-                        this.ptbCanvas.Image = this.canvas;
+                        this.selectedDrawTool.drawOnBitmap(ref this.currentCanvas, this.points, ref this.brush);
+                        this.ptbCanvas.Image = this.currentCanvas;
                         this.points.Clear();
                     }
                     break;
+                    /*
+                    switch (this.currentModificationTool)
+                    {
+                        case ModificationTools.Translation:
+                            this.points.Add(e.Location);
+                            this.currentCanvas = (Bitmap)this.previousCanvas.Clone();
+                            selectedDrawTool.drawOnBitmap(ref this.currentCanvas, this.points, ref this.brush);
+                            this.points.Clear();
+                            break;
+                    }
+                    */
             }
             this.isLeftClickPressed = false;
         }
-        private void ptbCanvas_Resize(object sender, EventArgs e) { this.canvas = new Bitmap(this.canvas, this.ptbCanvas.Width, this.ptbCanvas.Height); }
+        private void ptbCanvas_Resize(object sender, EventArgs e) 
+        { 
+            this.currentCanvas = new Bitmap(this.currentCanvas, this.ptbCanvas.Width, this.ptbCanvas.Height);
+            this.previousCanvas = new Bitmap(this.previousCanvas, this.ptbCanvas.Width, this.ptbCanvas.Height);
+        }
         private void ptbCanvas_MouseMove(object sender, MouseEventArgs e)
         {
             /*
@@ -182,6 +208,11 @@ namespace GraficacionAndresCastro
             this.selectedDrawTool = new DrawingTools.Ellipse(30, 50);
             this.grpBoxStyles.Enabled = true;
         }
+        private void transladarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.selectedDrawTool = null;
+            this.currentModificationTool = ModificationTools.Translation;
+        }
 
         private void trianguloToolStripMenuItem_Click(object sender, EventArgs e) { this.toolStripTxtBoxSidesRegularPoly.Text = "3"; }
         private void cuadradoToolStripMenuItem_Click(object sender, EventArgs e) { this.toolStripTxtBoxSidesRegularPoly.Text = "4"; }
@@ -194,13 +225,14 @@ namespace GraficacionAndresCastro
             if (e.KeyCode == Keys.Escape && this.points.Count > 0)
             {
                 this.points.Clear();
-                this.ptbCanvas.Image = this.canvas;
+                this.ptbCanvas.Image = this.currentCanvas;
             }
         }
         private void btnCleanCanvas_Click(object sender, EventArgs e)
         {
-            this.canvas = new Bitmap(ptbCanvas.Width, ptbCanvas.Height);
-            this.ptbCanvas.Image = (Image)this.canvas;
+            this.currentCanvas = new Bitmap(ptbCanvas.Width, ptbCanvas.Height);
+            this.previousCanvas = (Bitmap)currentCanvas.Clone();
+            this.ptbCanvas.Image = (Image)this.currentCanvas;
         }
     }
 }
