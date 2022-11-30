@@ -3,7 +3,7 @@ namespace GraficacionAndresCastro
     using DrawingTools = GraficacionAndresCastro.Classes.DrawingTools;
     public partial class MainForm : Form
     {
-        enum ModificationTools { None, Translation }
+        enum ModificationTools { None, Translation, Fill }
         ModificationTools currentModificationTool;
 
         DrawingTools.Tool selectedDrawTool;
@@ -15,7 +15,8 @@ namespace GraficacionAndresCastro
                 value.SelectedStyle = this.selectedDrawTool.SelectedStyle;
                 this.selectedDrawTool = value;
                 this.grpBoxStyles.Enabled = true;
-                this.currentModificationTool = ModificationTools.None;
+                if(this.currentModificationTool != ModificationTools.Fill)
+                    this.currentModificationTool = ModificationTools.None;
                 this.points.Clear();
             }
         }
@@ -62,7 +63,7 @@ namespace GraficacionAndresCastro
         }
         private void ptbCanvas_MouseClick(object sender, MouseEventArgs e)
         {
-            bool isDrawingFinished = this.points.Count == 0 && this.currentModificationTool != ModificationTools.Translation ? true : false;
+            bool isDrawingFinished = this.points.Count == 0 && this.currentModificationTool == ModificationTools.None? true : false;
             if (isDrawingFinished)
                 this.previousCanvas = (Bitmap)currentCanvas.Clone();
 
@@ -150,6 +151,12 @@ namespace GraficacionAndresCastro
                         }
                     }
                     break;
+                case DrawingTools.Fill:
+                    points.Add(e.Location);
+                    this.selectedDrawTool.drawOnBitmap(ref this.currentCanvas, points, ref this.brush);
+                    this.ptbCanvas.Image = (Image)this.currentCanvas;
+                    this.points.Clear();
+                    break;
             }
             this.isLeftClickPressed = false;
         }
@@ -227,7 +234,8 @@ namespace GraficacionAndresCastro
 
         private void btnCubeta_Click(object sender, EventArgs e)
         {
-
+            this.currentModificationTool = ModificationTools.Fill;
+            this.selectedDrawTool = new DrawingTools.Fill();
         }
     }
 }
