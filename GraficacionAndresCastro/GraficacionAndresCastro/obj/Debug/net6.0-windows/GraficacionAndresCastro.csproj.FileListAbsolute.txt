@@ -34,3 +34,4 @@ D:\Repositorios\paint-clone\GraficacionAndresCastro\GraficacionAndresCastro\obj\
 D:\Repositorios\paint-clone\GraficacionAndresCastro\GraficacionAndresCastro\obj\Debug\net6.0-windows\ref\GraficacionAndresCastro.dll
 D:\Repositorios\paint-clone\GraficacionAndresCastro\GraficacionAndresCastro\obj\Debug\net6.0-windows\GraficacionAndresCastro.pdb
 D:\Repositorios\paint-clone\GraficacionAndresCastro\GraficacionAndresCastro\obj\Debug\net6.0-windows\GraficacionAndresCastro.genruntimeconfig.cache
+D:\Escuela\5to semestre\Graficacion\graficacionAndresCastro\GraficacionAndresCastro\obj\Debug\net6.0-windows\GraficacionAndresCastro.VentanaAyuda.resources

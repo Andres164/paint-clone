@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GraficacionAndresCastro.Classes.DrawingTools
 {
-    internal class Brush
+    internal class Brush : Tool
     {
         public enum Sizes { Small, Medium, Big }
         public Color selectedColor { get; set; }
@@ -25,6 +25,10 @@ namespace GraficacionAndresCastro.Classes.DrawingTools
                     if (location.X + i >= 0 && location.X + i < canvas.Width && location.Y + j >= 0 && location.Y + j < canvas.Height)
                         canvas.SetPixel(location.X + i, location.Y + j, this.selectedColor); // Change the use of SetPixel to a more efficient method
                 }
+        }
+        public override void drawOnBitmap(ref Bitmap canvas, List<Point> points, ref Brush brush)
+        {
+            drawPixelOnBitmap(ref canvas, points[0]);
         }
     }
 }

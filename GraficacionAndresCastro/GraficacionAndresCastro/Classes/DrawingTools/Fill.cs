@@ -14,10 +14,7 @@ namespace GraficacionAndresCastro.Classes.DrawingTools
             //neighbours.
             Color backColor = (Color)(canvas.GetPixel(points[0].X, points[0].Y));
             if (backColor != brush.selectedColor)
-            {
-                MessageBox.Show($"BackColor: {backColor}\nselectedColor: {brush.selectedColor}");
                 neighbours.Push(points[0]);
-            }
             while (neighbours.Count != 0)
             {
                 Point pointToFill = neighbours.Pop();
