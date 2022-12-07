@@ -63,9 +63,10 @@
             this.toolStripTxtBoxSidesRegularPoly = new System.Windows.Forms.ToolStripTextBox();
             this.elipseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transladarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.rotacionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnCubeta = new System.Windows.Forms.Button();
+            this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.btnFill = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ptbCanvas)).BeginInit();
             this.grpBoxTools.SuspendLayout();
             this.grpBoxStyles.SuspendLayout();
@@ -87,13 +88,12 @@
             this.ptbCanvas.TabStop = false;
             this.ptbCanvas.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ptbCanvas_MouseClick);
             this.ptbCanvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ptbCanvas_MouseDown);
-            this.ptbCanvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ptbCanvas_MouseMove);
             this.ptbCanvas.Resize += new System.EventHandler(this.ptbCanvas_Resize);
             // 
             // grpBoxTools
             // 
             this.grpBoxTools.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.grpBoxTools.Controls.Add(this.btnCubeta);
+            this.grpBoxTools.Controls.Add(this.btnFill);
             this.grpBoxTools.Controls.Add(this.btnCleanCanvas);
             this.grpBoxTools.Controls.Add(this.grpBoxStyles);
             this.grpBoxTools.Controls.Add(this.grpBoxSize);
@@ -315,7 +315,8 @@
             this.poligonoRegularToolStripMenuItem,
             this.elipseToolStripMenuItem,
             this.transladarToolStripMenuItem,
-            this.rotacionToolStripMenuItem});
+            this.rotacionToolStripMenuItem,
+            this.ayudaToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(871, 24);
@@ -327,6 +328,7 @@
             this.pixelToolStripMenuItem.Name = "pixelToolStripMenuItem";
             this.pixelToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.pixelToolStripMenuItem.Text = "Pixel";
+            this.pixelToolStripMenuItem.Click += new System.EventHandler(this.pixelToolStripMenuItem_Click);
             // 
             // rectaToolStripMenuItem
             // 
@@ -427,14 +429,23 @@
             this.rotacionToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
             this.rotacionToolStripMenuItem.Text = "Rotacion";
             // 
-            // btnCubeta
+            // ayudaToolStripMenuItem
             // 
-            this.btnCubeta.Location = new System.Drawing.Point(368, 21);
-            this.btnCubeta.Name = "btnCubeta";
-            this.btnCubeta.Size = new System.Drawing.Size(37, 35);
-            this.btnCubeta.TabIndex = 5;
-            this.btnCubeta.UseVisualStyleBackColor = true;
-            this.btnCubeta.Click += new System.EventHandler(this.btnCubeta_Click);
+            this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
+            this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
+            this.ayudaToolStripMenuItem.Text = "Ayuda";
+            this.ayudaToolStripMenuItem.Click += new System.EventHandler(this.ayudaToolStripMenuItem_Click);
+            // 
+            // btnFill
+            // 
+            this.btnFill.BackgroundImage = global::GraficacionAndresCastro.Properties.Resources.FillTool;
+            this.btnFill.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnFill.Location = new System.Drawing.Point(337, 18);
+            this.btnFill.Name = "btnFill";
+            this.btnFill.Size = new System.Drawing.Size(68, 59);
+            this.btnFill.TabIndex = 8;
+            this.btnFill.UseVisualStyleBackColor = true;
+            this.btnFill.Click += new System.EventHandler(this.btnFill_Click);
             // 
             // MainForm
             // 
@@ -498,7 +509,8 @@
         private Button btnCleanCanvas;
         private ToolStripMenuItem elipseToolStripMenuItem;
         private ToolStripMenuItem transladarToolStripMenuItem;
-        private Button btnCubeta;
         private ToolStripMenuItem rotacionToolStripMenuItem;
+        private ToolStripMenuItem ayudaToolStripMenuItem;
+        private Button btnFill;
     }
 }

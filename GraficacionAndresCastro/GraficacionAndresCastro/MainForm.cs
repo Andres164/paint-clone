@@ -85,12 +85,10 @@ namespace GraficacionAndresCastro
             }
             switch (this.selectedDrawTool)
             {
-                /*
-                case Tools.Pixel:
-                    brush.drawPixelOnBitmap(ref this.canvas, e.Location);
-                    this.ptbCanvas.Image = this.canvas;
+                case DrawingTools.Brush:
+                    brush.drawPixelOnBitmap(ref this.currentCanvas, e.Location);
+                    this.ptbCanvas.Image = this.currentCanvas;
                     break;
-                */
                 case DrawingTools.Straight:
                     if (points.Count != 2)
                         points.Add(e.Location);
@@ -165,16 +163,6 @@ namespace GraficacionAndresCastro
             this.currentCanvas = new Bitmap(this.currentCanvas, this.ptbCanvas.Width, this.ptbCanvas.Height);
             this.previousCanvas = new Bitmap(this.previousCanvas, this.ptbCanvas.Width, this.ptbCanvas.Height);
         }
-        private void ptbCanvas_MouseMove(object sender, MouseEventArgs e)
-        {
-            /*
-            if(this.selectedDrawTool == DrawingTools.Tool && isLeftClickPressed)
-            {
-                brush.drawPixelOnBitmap(ref this.canvas, e.Location);
-                this.ptbCanvas.Image = this.canvas;
-            }
-            */
-        }
         private void ptbCanvas_MouseDown(object sender, MouseEventArgs e) { this.isLeftClickPressed = true; }
 
         private void btnSolid_Click(object sender, EventArgs e) { this.selectedDrawTool.SelectedStyle = DrawingTools.Tool.styles.Solid; }
@@ -231,8 +219,18 @@ namespace GraficacionAndresCastro
             this.previousCanvas = (Bitmap)currentCanvas.Clone();
             this.ptbCanvas.Image = (Image)this.currentCanvas;
         }
+        private void ayudaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VentanaAyuda ventanaAyuda = new VentanaAyuda();
+            ventanaAyuda.Show();
+        }
 
-        private void btnCubeta_Click(object sender, EventArgs e)
+        private void pixelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.selectedDrawTool = new DrawingTools.Brush();
+        }
+
+        private void btnFill_Click(object sender, EventArgs e)
         {
             this.currentModificationTool = ModificationTools.Fill;
             this.selectedDrawTool = new DrawingTools.Fill();
