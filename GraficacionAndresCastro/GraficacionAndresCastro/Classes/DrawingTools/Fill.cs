@@ -18,7 +18,8 @@ namespace GraficacionAndresCastro.Classes.DrawingTools
             while (neighbours.Count != 0)
             {
                 Point pointToFill = neighbours.Pop();
-                if (canvas.GetPixel(pointToFill.X, pointToFill.Y) == backColor)
+                bool isValidCoordinate = pointToFill.X >= 0 && pointToFill.X < canvas.Width && pointToFill.Y >= 0 && pointToFill.Y < canvas.Height;
+                if (isValidCoordinate && canvas.GetPixel(pointToFill.X, pointToFill.Y) == backColor)
                 {
                     canvas.SetPixel(pointToFill.X, pointToFill.Y, brush.selectedColor);
                     neighbours.Push(new Point(pointToFill.X+1, pointToFill.Y));

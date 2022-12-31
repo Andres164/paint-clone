@@ -10,12 +10,12 @@ namespace GraficacionAndresCastro
         DrawingTools.Tool SelectedDrawTool
         {
             get => selectedDrawTool;
-            set 
-            { 
+            set
+            {
                 value.SelectedStyle = this.selectedDrawTool.SelectedStyle;
                 this.selectedDrawTool = value;
                 this.grpBoxStyles.Enabled = true;
-                if(this.currentModificationTool != ModificationTools.Fill)
+                if (this.currentModificationTool != ModificationTools.Fill)
                     this.currentModificationTool = ModificationTools.None;
                 this.points.Clear();
             }
@@ -25,7 +25,6 @@ namespace GraficacionAndresCastro
         Bitmap currentCanvas;
         List<Point> points;
         List<Point> previousFigurePoints;
-        bool isLeftClickPressed;
         public MainForm()
         {
             InitializeComponent();
@@ -40,7 +39,6 @@ namespace GraficacionAndresCastro
             this.points = new List<Point>(20);
             this.previousFigurePoints = new List<Point>(20);
             this.previousFigurePoints.Add( new Point(1, 1) );
-            this.isLeftClickPressed = false;
 
             this.btnSelectedColor.BackColor = this.brush.selectedColor;
             this.KeyPreview = true;
@@ -63,7 +61,7 @@ namespace GraficacionAndresCastro
         }
         private void ptbCanvas_MouseClick(object sender, MouseEventArgs e)
         {
-            bool isDrawingFinished = this.points.Count == 0 && this.currentModificationTool == ModificationTools.None? true : false;
+            bool isDrawingFinished = this.points.Count == 0 && this.currentModificationTool != ModificationTools.Translation ? true : false;
             if (isDrawingFinished)
                 this.previousCanvas = (Bitmap)currentCanvas.Clone();
 
@@ -74,7 +72,7 @@ namespace GraficacionAndresCastro
 
                     int diffPreviousToNewPoint_X = e.Location.X - this.previousFigurePoints[0].X;
                     int diffPreviousToNewPoint_Y = e.Location.Y - this.previousFigurePoints[0].Y;
-                    for(int i = 0; i < this.previousFigurePoints.Count; i++)
+                    for (int i = 0; i < this.previousFigurePoints.Count; i++)
                     {
                         Point point = this.previousFigurePoints[i];
                         point.X += diffPreviousToNewPoint_X;
@@ -156,14 +154,12 @@ namespace GraficacionAndresCastro
                     this.points.Clear();
                     break;
             }
-            this.isLeftClickPressed = false;
         }
         private void ptbCanvas_Resize(object sender, EventArgs e) 
         { 
             this.currentCanvas = new Bitmap(this.currentCanvas, this.ptbCanvas.Width, this.ptbCanvas.Height);
             this.previousCanvas = new Bitmap(this.previousCanvas, this.ptbCanvas.Width, this.ptbCanvas.Height);
         }
-        private void ptbCanvas_MouseDown(object sender, MouseEventArgs e) { this.isLeftClickPressed = true; }
 
         private void btnSolid_Click(object sender, EventArgs e) { this.selectedDrawTool.SelectedStyle = DrawingTools.Tool.styles.Solid; }
         private void btnDotted_Click(object sender, EventArgs e) { this.selectedDrawTool.SelectedStyle = DrawingTools.Tool.styles.Dotted; }
@@ -188,6 +184,7 @@ namespace GraficacionAndresCastro
             }
         }
 
+        private void pixelToolStripMenuItem_Click(object sender, EventArgs e) { this.selectedDrawTool = new DrawingTools.Brush(); }
         private void rectaToolStripMenuItem_Click(object sender, EventArgs e) { this.SelectedDrawTool = new DrawingTools.Straight(); }
         private void circuloToolStripMenuItem_Click(object sender, EventArgs e) { this.SelectedDrawTool = new DrawingTools.Circle(30); }
         private void poligonoIrregularToolStripMenuItem_Click(object sender, EventArgs e) { this.SelectedDrawTool = new DrawingTools.Polygon(3); }
@@ -197,6 +194,16 @@ namespace GraficacionAndresCastro
         {
             this.currentModificationTool = ModificationTools.Translation;
             this.grpBoxStyles.Enabled = true;
+        }
+        private void btnFill_Click(object sender, EventArgs e)
+        {
+            this.currentModificationTool = ModificationTools.Fill;
+            this.selectedDrawTool = new DrawingTools.Fill();
+        }
+        private void ayudaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VentanaAyuda ventanaAyuda = new VentanaAyuda();
+            ventanaAyuda.Show();
         }
 
         private void trianguloToolStripMenuItem_Click(object sender, EventArgs e) { this.toolStripTxtBoxSidesRegularPoly.Text = "3"; }
@@ -219,21 +226,8 @@ namespace GraficacionAndresCastro
             this.previousCanvas = (Bitmap)currentCanvas.Clone();
             this.ptbCanvas.Image = (Image)this.currentCanvas;
         }
-        private void ayudaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            VentanaAyuda ventanaAyuda = new VentanaAyuda();
-            ventanaAyuda.Show();
-        }
+        
 
-        private void pixelToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.selectedDrawTool = new DrawingTools.Brush();
-        }
-
-        private void btnFill_Click(object sender, EventArgs e)
-        {
-            this.currentModificationTool = ModificationTools.Fill;
-            this.selectedDrawTool = new DrawingTools.Fill();
-        }
+        
     }
 }

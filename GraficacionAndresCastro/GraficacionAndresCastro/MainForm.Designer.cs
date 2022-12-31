@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.ptbCanvas = new System.Windows.Forms.PictureBox();
             this.grpBoxTools = new System.Windows.Forms.GroupBox();
+            this.btnFill = new System.Windows.Forms.Button();
             this.btnCleanCanvas = new System.Windows.Forms.Button();
             this.grpBoxStyles = new System.Windows.Forms.GroupBox();
             this.btnDashed = new System.Windows.Forms.Button();
@@ -63,10 +64,8 @@
             this.toolStripTxtBoxSidesRegularPoly = new System.Windows.Forms.ToolStripTextBox();
             this.elipseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transladarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rotacionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
-            this.btnFill = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ptbCanvas)).BeginInit();
             this.grpBoxTools.SuspendLayout();
             this.grpBoxStyles.SuspendLayout();
@@ -87,7 +86,6 @@
             this.ptbCanvas.TabIndex = 0;
             this.ptbCanvas.TabStop = false;
             this.ptbCanvas.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ptbCanvas_MouseClick);
-            this.ptbCanvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ptbCanvas_MouseDown);
             this.ptbCanvas.Resize += new System.EventHandler(this.ptbCanvas_Resize);
             // 
             // grpBoxTools
@@ -104,6 +102,17 @@
             this.grpBoxTools.Size = new System.Drawing.Size(871, 105);
             this.grpBoxTools.TabIndex = 1;
             this.grpBoxTools.TabStop = false;
+            // 
+            // btnFill
+            // 
+            this.btnFill.BackgroundImage = global::GraficacionAndresCastro.Properties.Resources.FillTool;
+            this.btnFill.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnFill.Location = new System.Drawing.Point(337, 18);
+            this.btnFill.Name = "btnFill";
+            this.btnFill.Size = new System.Drawing.Size(68, 59);
+            this.btnFill.TabIndex = 8;
+            this.btnFill.UseVisualStyleBackColor = true;
+            this.btnFill.Click += new System.EventHandler(this.btnFill_Click);
             // 
             // btnCleanCanvas
             // 
@@ -315,7 +324,6 @@
             this.poligonoRegularToolStripMenuItem,
             this.elipseToolStripMenuItem,
             this.transladarToolStripMenuItem,
-            this.rotacionToolStripMenuItem,
             this.ayudaToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -423,29 +431,12 @@
             this.transladarToolStripMenuItem.Text = "Transladar";
             this.transladarToolStripMenuItem.Click += new System.EventHandler(this.transladarToolStripMenuItem_Click);
             // 
-            // rotacionToolStripMenuItem
-            // 
-            this.rotacionToolStripMenuItem.Name = "rotacionToolStripMenuItem";
-            this.rotacionToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
-            this.rotacionToolStripMenuItem.Text = "Rotacion";
-            // 
             // ayudaToolStripMenuItem
             // 
             this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
             this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.ayudaToolStripMenuItem.Text = "Ayuda";
             this.ayudaToolStripMenuItem.Click += new System.EventHandler(this.ayudaToolStripMenuItem_Click);
-            // 
-            // btnFill
-            // 
-            this.btnFill.BackgroundImage = global::GraficacionAndresCastro.Properties.Resources.FillTool;
-            this.btnFill.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnFill.Location = new System.Drawing.Point(337, 18);
-            this.btnFill.Name = "btnFill";
-            this.btnFill.Size = new System.Drawing.Size(68, 59);
-            this.btnFill.TabIndex = 8;
-            this.btnFill.UseVisualStyleBackColor = true;
-            this.btnFill.Click += new System.EventHandler(this.btnFill_Click);
             // 
             // MainForm
             // 
@@ -509,7 +500,6 @@
         private Button btnCleanCanvas;
         private ToolStripMenuItem elipseToolStripMenuItem;
         private ToolStripMenuItem transladarToolStripMenuItem;
-        private ToolStripMenuItem rotacionToolStripMenuItem;
         private ToolStripMenuItem ayudaToolStripMenuItem;
         private Button btnFill;
     }
